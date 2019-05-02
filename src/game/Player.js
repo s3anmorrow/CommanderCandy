@@ -1,5 +1,3 @@
-import Phaser from "phaser";
-
 import { START_HEALTH, HEALTH_FOR_HIT, LASER_SPEED } from "./Globals";
 
 export default class Player {
