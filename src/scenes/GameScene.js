@@ -25,6 +25,7 @@ export default class GameScene extends Phaser.Scene {
 
         // spritemanager handles all adding sprites to the game (animated or static)
         this._spriteManager = new SpriteManager(this);
+
         // constructing other managers and pass in Scene object / spriteManager
         this._userInterface = new UserInterface(this, this._spriteManager);
         this._platformManager = new PlatformManager(this, this._spriteManager);
@@ -36,10 +37,10 @@ export default class GameScene extends Phaser.Scene {
     // ----------------------------------- scene methods
     // each scene has its own displaylist
     preload() {
-        this.load.path = './assets/';
+        //this.load.path = './assets/';
 
         // manager object preload stage setup
-        this._spriteManager.preload();
+        //this._spriteManager.preload();
         this._userInterface.preload();
         this._platformManager.preload();
         this._player.preload();

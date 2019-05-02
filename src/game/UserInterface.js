@@ -26,7 +26,7 @@ export default class UserInterface {
         this._scoreText = this._scene.add.bitmapText(16, 16, "pressStart", "0");
 
         // add health bar border
-        this._healthBarBorder = this._spriteManager.addSprite(483, 18, "main", "misc/healthBorder");
+        this._healthBarBorder = this._spriteManager.addSprite(483, 18, "misc/healthBorder", "main");
 
         // // add health bar background
         // this._healthBarBacking = this._scene.add.graphics({x:485, y:22});

@@ -3,11 +3,13 @@ import { spriteManifest } from "../manifests/spriteManifest";
 export default class SpriteManager {
 
     constructor(scene) {
-        this._scene = scene;
+        this._scene = scene;        
     }
 
     // ------------------------------------------------------ public methods
     preload() {
+        this._scene.load.path = './assets/';
+
         for (let data of spriteManifest) {
             if (data.type == "image") {
                 // loading static image
@@ -37,13 +39,21 @@ export default class SpriteManager {
         });
     }
 
-    addSprite(x, y, spritesheetID, frameID, physics = false) {
-        if (physics) return this._scene.physics.add.sprite(x, y, spritesheetID, frameID);
-        else return this._scene.add.sprite(x, y, spritesheetID, frameID);
+    addSprite(x, y, frameID, spritesheetID = undefined, physics = false) {
+        // adding sprite based on loaded image
+        if (spritesheetID == undefined) return this._scene.add.sprite(x, y, frameID).setOrigin(0, 0);
+
+        // adding sprite based on spritesheet frames
+        if (physics) return this._scene.physics.add.sprite(x, y, spritesheetID, frameID).setOrigin(0, 0);
+        else return this._scene.add.sprite(x, y, spritesheetID, frameID).setOrigin(0, 0);
+    }
+
+    addImage(x, y, imageID) {
+        return this._scene.add.image(x, y, imageID).setOrigin(0, 0);
     }
 
     addSound(soundID) {
-        return this.sound.add(soundID);
+        return this._scene.sound.add(soundID);
     }
 
 }

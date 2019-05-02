@@ -30,7 +30,7 @@ export default class EnemyManager {
             let x = (this._player.sprite.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
             // add sprite to game as physics sprite
-            this._sprite = this._spriteManager.addSprite(x, -30, "main", "enemies/pixil-frame-0", true);
+            this._sprite = this._spriteManager.addSprite(x, -30, "enemies/pixil-frame-0", "main", true);
             this._sprite.setActive(false);
             this._sprite.setVisible(false);
 

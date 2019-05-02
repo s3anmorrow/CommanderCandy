@@ -2,7 +2,7 @@
 export const DEBUG_MODE = false;
 export const BACKGROUND_COLOR = 0x003366;
 
-export const START_HEALTH = 10;
+export const START_HEALTH = 1;
 export const HEALTH_FOR_HIT = 1;
 export const LASER_SPEED = 500;
 export const POINTS_FOR_KILL = 20;

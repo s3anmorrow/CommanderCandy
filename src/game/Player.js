@@ -40,7 +40,7 @@ export default class Player {
         this._immune = false;
 
         // add sprite to game as physics sprite
-        this._sprite = this._spriteManager.addSprite(100, 450, "main", "player/pixil-frame-4", true);
+        this._sprite = this._spriteManager.addSprite(100, 450, "player/pixil-frame-4", "main", true);
         this._sprite.body.setGravityY(300);
         this._sprite.setBounce(0.2);
         this._sprite.setCollideWorldBounds(true);
@@ -53,7 +53,7 @@ export default class Player {
 
 
         // add laser sprite to game
-        this._bullet = this._spriteManager.addSprite(0, 1, "main", "misc/bullet", true);
+        this._bullet = this._spriteManager.addSprite(0, 1, "misc/bullet", "main", true);
         this._bullet.body.setAllowGravity(false);
         this._bullet.setActive(false);
         this._bullet.x = -1000;

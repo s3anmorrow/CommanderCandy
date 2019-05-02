@@ -24,7 +24,7 @@ export default class Candy {
 
     setup() {
         // add sprite to game as physics sprite
-        this._sprite = this._spriteManager.addSprite(0, 0, "main", "pickups/candy", true);
+        this._sprite = this._spriteManager.addSprite(0, 0, "pickups/candy", "main", true);
         this._sprite.setActive(false);
         this._sprite.setVisible(false);
         // release initial candy after setup complete

@@ -85,8 +85,8 @@ export default class PlatformManager {
                     this._platforms.add(this._spriteManager.addSprite(
                         col * 60,
                         row * 30,
-                        "main",
-                        "platform/platform" + type
+                        "platform/platform" + type,
+                        "main"
                     ));
                 }
             }

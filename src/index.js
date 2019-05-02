@@ -26,6 +26,8 @@ import TitleScene from "./scenes/TitleScene";
 import GameScene from "./scenes/GameScene";
 import EndScene from "./scenes/EndScene";
 
+//import SpriteManager from "./managers/SpriteManager";
+
 // configuration of the game
 const config = {
   type: Phaser.AUTO,
@@ -41,6 +43,10 @@ const config = {
     }
   }
 };
+
+// spritemanager handles all adding sprites to the game (animated or static)
+//let spriteManager = new SpriteManager();
+
 // construct the main Phaser game object
 let game = new Phaser.Game(config);
 // add scenes to the game

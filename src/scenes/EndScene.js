@@ -1,5 +1,7 @@
 import Phaser from "phaser";
 
+import SpriteManager from "../managers/SpriteManager";
+
 export default class EndScene extends Phaser.Scene {
 
     constructor(game) {
@@ -8,17 +10,17 @@ export default class EndScene extends Phaser.Scene {
         // initialization
         this._game = game;
         this._btnPlayAgain = null;
+        this._spriteManager = new SpriteManager(this);
     }
 
     preload() {
-        this.load.image('screenGameOver', './assets/statics/screenGameOver.png');
-        this.load.image('btnPlayAgain', './assets/statics/btnPlayAgain.png');
+
     }
 
     create() {
         // add game objects to the scene
-        this.add.image(0, 0, 'screenGameOver').setOrigin(0, 0);
-        this._btnPlayAgain = this.add.sprite(230, 500, 'btnPlayAgain').setOrigin(0, 0).setInteractive();
+        this._spriteManager.addImage(0, 0, "screenGameOver");
+        this._btnPlayAgain = this._spriteManager.addSprite(230, 500, "btnPlayAgain").setInteractive();
 
         // add event listners to button
         this._btnPlayAgain.on("pointerover", () => {
