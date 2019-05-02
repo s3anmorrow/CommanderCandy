@@ -1,6 +1,6 @@
-import { spriteManifest } from "../manifests/spriteManifest";
+import { assetManifest } from "../manifests/AssetManifest";
 
-export default class SpriteManager {
+export default class AssetManager {
 
     constructor(scene) {
         this._scene = scene;        
@@ -10,7 +10,7 @@ export default class SpriteManager {
     preload() {
         this._scene.load.path = './assets/';
 
-        for (let data of spriteManifest) {
+        for (let data of assetManifest) {
             if (data.type == "image") {
                 // loading static image
                 this._scene.load.image(data.id, data.src);

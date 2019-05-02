@@ -2,9 +2,9 @@ import Phaser from "phaser";
 
 export default class Candy {
 
-    constructor(scene, spriteManager, platformManager, emitter, player) {
+    constructor(scene, assetManager, platformManager, emitter, player) {
         this._scene = scene;
-        this._spriteManager = spriteManager;
+        this._assetManager = assetManager;
         this._platformManager = platformManager;
         this._player = player;
         this._sprite = null;
@@ -24,7 +24,7 @@ export default class Candy {
 
     setup() {
         // add sprite to game as physics sprite
-        this._sprite = this._spriteManager.addSprite(0, 0, "pickups/candy", "main", true);
+        this._sprite = this._assetManager.addSprite(0, 0, "pickups/candy", "main", true);
         this._sprite.setActive(false);
         this._sprite.setVisible(false);
         // release initial candy after setup complete

@@ -2,9 +2,9 @@ import { START_HEALTH } from "./Globals";
 
 export default class UserInterface {
 
-    constructor(scene, spriteManager) {
+    constructor(scene, assetManager) {
         this._scene = scene;
-        this._spriteManager = spriteManager;
+        this._assetManager = assetManager;
         this._scoreText = null;
         this._healthBar = null;
         //this._healthBarBacking = null;
@@ -26,7 +26,7 @@ export default class UserInterface {
         this._scoreText = this._scene.add.bitmapText(16, 16, "pressStart", "0");
 
         // add health bar border
-        this._healthBarBorder = this._spriteManager.addSprite(483, 18, "misc/healthBorder", "main");
+        this._healthBarBorder = this._assetManager.addSprite(483, 18, "misc/healthBorder", "main");
 
         // // add health bar background
         // this._healthBarBacking = this._scene.add.graphics({x:485, y:22});

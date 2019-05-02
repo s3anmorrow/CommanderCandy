@@ -4,9 +4,9 @@ import { STARTING_LEVEL } from "../game/Globals";
 
 export default class PlatformManager {
 
-    constructor(scene, spriteManager) {
+    constructor(scene, assetManager) {
         this._scene = scene;
-        this._spriteManager = spriteManager;
+        this._assetManager = assetManager;
         this._platforms = null;
         this._level = STARTING_LEVEL;
     }
@@ -82,7 +82,7 @@ export default class PlatformManager {
                     else if (cellData.toUpperCase() == "G") type = "Green";
                     else if (cellData.toUpperCase() == "S") type = "Silver";
 
-                    this._platforms.add(this._spriteManager.addSprite(
+                    this._platforms.add(this._assetManager.addSprite(
                         col * 60,
                         row * 30,
                         "platform/platform" + type,

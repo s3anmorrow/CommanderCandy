@@ -1,4 +1,4 @@
-let spriteManifest = [
+let assetManifest = [
     {
         "type":"sprite",
         "id":"main",
@@ -31,4 +31,4 @@ let spriteManifest = [
     }
 ];
 
-export { spriteManifest };
+export { assetManifest };

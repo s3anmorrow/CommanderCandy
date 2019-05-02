@@ -3,7 +3,7 @@ import Phaser from "phaser";
 import { POINTS_FOR_KILL, POINTS_FOR_CANDY } from "../game/Globals";
 
 import PlatformManager from "../managers/PlatformManager";
-import SpriteManager from "../managers/SpriteManager";
+import AssetManager from "../managers/AssetManager";
 import EnemyManager from "../managers/EnemyManager";
 import UserInterface from "../game/UserInterface";
 import Player from "../game/Player";
@@ -24,14 +24,14 @@ export default class GameScene extends Phaser.Scene {
         this._emitter = new Phaser.Events.EventEmitter();
 
         // spritemanager handles all adding sprites to the game (animated or static)
-        this._spriteManager = new SpriteManager(this);
+        this._assetManager = new AssetManager(this);
 
-        // constructing other managers and pass in Scene object / spriteManager
-        this._userInterface = new UserInterface(this, this._spriteManager);
-        this._platformManager = new PlatformManager(this, this._spriteManager);
-        this._player = new Player(this, this._spriteManager, this._platformManager, this._emitter);
-        this._candy = new Candy(this, this._spriteManager, this._platformManager, this._emitter, this._player);
-        this._enemyManager = new EnemyManager(this, this._spriteManager, this._platformManager, this._emitter, this._player);
+        // constructing other managers and pass in Scene object / assetManager
+        this._userInterface = new UserInterface(this, this._assetManager);
+        this._platformManager = new PlatformManager(this, this._assetManager);
+        this._player = new Player(this, this._assetManager, this._platformManager, this._emitter);
+        this._candy = new Candy(this, this._assetManager, this._platformManager, this._emitter, this._player);
+        this._enemyManager = new EnemyManager(this, this._assetManager, this._platformManager, this._emitter, this._player);
     }
 
     // ----------------------------------- scene methods
@@ -40,7 +40,7 @@ export default class GameScene extends Phaser.Scene {
         //this.load.path = './assets/';
 
         // manager object preload stage setup
-        //this._spriteManager.preload();
+        //this._assetManager.preload();
         this._userInterface.preload();
         this._platformManager.preload();
         this._player.preload();
@@ -56,9 +56,9 @@ export default class GameScene extends Phaser.Scene {
         console.log("gameScene create");
 
         // register all animations of game for use
-        this._spriteManager.registerAnimation("main", "walk", 0, 4, "player/pixil-frame-", true);
-        this._spriteManager.registerAnimation("main", "enemyWaddle", 0, 2, "enemies/pixil-frame-", true);
-        this._spriteManager.registerAnimation("main", "laser", 0, 3, "laser/pixil-frame-", true);
+        this._assetManager.registerAnimation("main", "walk", 0, 4, "player/pixil-frame-", true);
+        this._assetManager.registerAnimation("main", "enemyWaddle", 0, 2, "enemies/pixil-frame-", true);
+        this._assetManager.registerAnimation("main", "laser", 0, 3, "laser/pixil-frame-", true);
 
         // other setups
         this._userInterface.setup();

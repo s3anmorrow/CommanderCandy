@@ -2,9 +2,9 @@ import { START_HEALTH, HEALTH_FOR_HIT, LASER_SPEED } from "./Globals";
 
 export default class Player {
 
-    constructor(scene, spriteManager, platformManager, emitter) {
+    constructor(scene, assetManager, platformManager, emitter) {
         this._scene = scene;
-        this._spriteManager = spriteManager;
+        this._assetManager = assetManager;
         this._platformManager = platformManager;
         this._emitter = emitter;
         this._sprite = null;
@@ -37,7 +37,7 @@ export default class Player {
 
     setup() {
         // add sprite to game as physics sprite
-        this._sprite = this._spriteManager.addSprite(100, 450, "main", "player/pixil-frame-4", true);
+        this._sprite = this._assetManager.addSprite(100, 450, "main", "player/pixil-frame-4", true);
         this._sprite.body.setGravityY(300);
         this._sprite.setBounce(0.2);
         this._sprite.setCollideWorldBounds(true);
@@ -50,7 +50,7 @@ export default class Player {
 
 
         // add laser sprite to game
-        this._laser = this._spriteManager.addSprite(0, 1, "main", "laser/pixil-frame-0", true);
+        this._laser = this._assetManager.addSprite(0, 1, "main", "laser/pixil-frame-0", true);
         //this._laser.displayWidth = 1;
         this._laser.body.setAllowGravity(false);
         this._laser.alpha = 0.6;

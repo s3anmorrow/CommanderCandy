@@ -4,9 +4,9 @@ import { STARTING_ENEMY_INTERVAL, ENEMY_INTERVAL_DECREASE } from "./../game/Glob
 
 export default class EnemyManager {
 
-    constructor(scene, spriteManager, platformManager, emitter, player) {
+    constructor(scene, assetManager, platformManager, emitter, player) {
         this._scene = scene;
-        this._spriteManager = spriteManager;
+        this._assetManager = assetManager;
         this._platformManager = platformManager;
         this._player = player;
         this._enemies = null;
@@ -30,7 +30,7 @@ export default class EnemyManager {
             let x = (this._player.sprite.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
             // add sprite to game as physics sprite
-            this._sprite = this._spriteManager.addSprite(x, -30, "enemies/pixil-frame-0", "main", true);
+            this._sprite = this._assetManager.addSprite(x, -30, "enemies/pixil-frame-0", "main", true);
             this._sprite.setActive(false);
             this._sprite.setVisible(false);
 

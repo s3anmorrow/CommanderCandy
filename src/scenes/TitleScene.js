@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-import SpriteManager from "../managers/SpriteManager";
+import AssetManager from "../managers/AssetManager";
 
 export default class GameScene extends Phaser.Scene {
 
@@ -9,12 +9,12 @@ export default class GameScene extends Phaser.Scene {
         // initialization
         this._game = game;
         this._btnStart = null;
-        this._spriteManager = new SpriteManager(this);
+        this._assetManager = new AssetManager(this);
     }
 
     preload() {
         // the first preload of the assets!
-        this._spriteManager.preload();
+        this._assetManager.preload();
     }
 
     create() {
@@ -22,12 +22,12 @@ export default class GameScene extends Phaser.Scene {
         console.log("title create");
 
         // add game objects to the scene
-        this._spriteManager.addImage(0, 0, "screenTitle");
-        this._btnStart = this._spriteManager.addSprite(250, 500, "btnStart");
+        this._assetManager.addImage(0, 0, "screenTitle");
+        this._btnStart = this._assetManager.addSprite(250, 500, "btnStart");
         this._btnStart.setInteractive();
 
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        this._test = this._spriteManager.addSound("test");
+        this._test = this._assetManager.addSound("test");
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         // add event listners to button
