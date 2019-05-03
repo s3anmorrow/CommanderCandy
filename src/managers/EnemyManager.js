@@ -26,8 +26,8 @@ export default class EnemyManager {
 
         // create object pool of enemies
         for (let n=0; n<50; n++) {
-            // pick random x location of bomb to be released away from the player
-            let x = (this._player.sprite.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+            // pick random x location of enemy to be released away from the player
+            let x = (this._player.sprite.x < 300) ? Phaser.Math.Between(50, 550) : Phaser.Math.Between(0, 400);
 
             // add sprite to game as physics sprite
             this._sprite = this._assetManager.addSprite(x, -30, "enemies/pixil-frame-0", "main", true);

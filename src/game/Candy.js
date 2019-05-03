@@ -37,7 +37,7 @@ export default class Candy {
 
         // randomization sets
         // pick random x location of bomb to be released away from the player
-        let x = (this._player.sprite.x < 300) ? Phaser.Math.Between(300, 600) : Phaser.Math.Between(0, 400);
+        let x = (this._player.sprite.x < 300) ? Phaser.Math.Between(300, 550) : Phaser.Math.Between(50, 300);
         this._sprite.x = x;
         this._sprite.y = -30;
 

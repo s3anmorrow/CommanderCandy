@@ -1,4 +1,5 @@
-import { START_HEALTH, HEALTH_FOR_HIT, LASER_SPEED } from "./Globals";
+import Phaser from "phaser";
+import { START_HEALTH, HEALTH_FOR_HIT, BULLET_SPEED } from "./Globals";
 
 export default class Player {
 
@@ -36,6 +37,7 @@ export default class Player {
     setup() {
         // initialization
         this._immune = false;
+        this._health = START_HEALTH;
 
         // add sprite to game as physics sprite
         this._sprite = this._assetManager.addSprite(100, 450, "player/pixil-frame-4", "main", true);
@@ -89,15 +91,15 @@ export default class Player {
         // fire in direction last moved
         if (this._lastDirection == 1) {
             this._bullet.setVelocityY(0);
-            this._bullet.setVelocityX(LASER_SPEED);
+            this._bullet.setVelocityX(BULLET_SPEED);
         } else {
             this._bullet.setVelocityY(0);
-            this._bullet.setVelocityX(-LASER_SPEED);
+            this._bullet.setVelocityX(-BULLET_SPEED);
         }
 
         // position laser bolt with player
         this._bullet.x = this._sprite.x;
-        this._bullet.y = this._sprite.y + 8;
+        this._bullet.y = this._sprite.y + 6;
         // bring player to top so laser is behind
         this._scene.children.bringToTop(this._sprite);
 
@@ -136,14 +138,17 @@ export default class Player {
         this._health -= HEALTH_FOR_HIT;
 
         // player recoils
+        let which = Phaser.Math.Between(1, 2);
         if (this._sprite.body.touching.left) {
             this._sprite.x += 10;
         } else if (this._sprite.body.touching.right) {
             this._sprite.x -= 10;
         } else if (this._sprite.body.touching.up) {
-            this._sprite.x += 10;
+            if (which == 1) this._sprite.x += 5;
+            else this._sprite.x -= 5;
         } else if (this._sprite.body.touching.down) {
-            this._sprite.x -= 10;
+            if (which == 1) this._sprite.x += 5;
+            else this._sprite.x -= 5;
         }
 
         // TODO - play animation of player getting hurt
