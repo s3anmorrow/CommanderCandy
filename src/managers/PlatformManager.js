@@ -30,7 +30,9 @@ export default class PlatformManager {
     }
 
     levelUp() {
-        this._level++;
+        if (this._level < levelManifest.length) {
+            this._level++;
+        }
 
         console.log("level: " + this._level);
 
