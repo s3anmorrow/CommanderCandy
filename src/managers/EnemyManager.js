@@ -30,12 +30,15 @@ export default class EnemyManager {
             let x = (this._player.sprite.x < 300) ? Phaser.Math.Between(50, 550) : Phaser.Math.Between(0, 400);
 
             // add sprite to game as physics sprite
-            this._sprite = this._assetManager.addSprite(x, -30, "enemies/pixil-frame-0", "main", true);
+            this._sprite = this._assetManager.addSprite(-1000, -50, "enemies/pixil-frame-0", "main", true);
             this._sprite.setActive(false);
             this._sprite.setVisible(false);
 
             // add new enemy sprite to group
             this._enemies.add(this._sprite);
+
+            // make no gravity by default
+            this._sprite.body.setAllowGravity(false);
         }
 
         // start timer to release enemies into game
@@ -56,6 +59,7 @@ export default class EnemyManager {
             enemy.setActive(true);
             enemy.setVisible(true);
             enemy.setVelocity(Phaser.Math.Between(-200, 200), 20);
+            enemy.body.setAllowGravity(true);
 
             // setup collider with platforms
             this._platformManager.setupCollider(enemy);
@@ -80,6 +84,8 @@ export default class EnemyManager {
         enemy.setActive(false);
         enemy.setVisible(false);
         enemy.bulletCollider.destroy();
+        enemy.x = -1000;
+        enemy.body.setAllowGravity(false);
         this._player.killLaser();
         // an enemy has been killed!
         this._emitter.emit("GameEvent","EnemyKilled");
