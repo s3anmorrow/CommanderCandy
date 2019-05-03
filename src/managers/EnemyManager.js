@@ -34,15 +34,15 @@ export default class EnemyManager {
             let x = (this._player.sprite.x < 300) ? Phaser.Math.Between(50, 550) : Phaser.Math.Between(0, 400);
 
             // add sprite to game as physics sprite
-            this._sprite = this._assetManager.addSprite(-1000, -50, "enemies/pixil-frame-0", "main", true);
-            this._sprite.setActive(false);
-            this._sprite.setVisible(false);
+            let enemy = this._assetManager.addSprite(-1000, -50, "enemies/pixil-frame-0", "main", true);
+            enemy.setActive(false);
+            enemy.setVisible(false);
 
             // add new enemy sprite to group
-            this._enemies.add(this._sprite);
+            this._enemies.add(enemy);
 
             // make no gravity by default
-            this._sprite.body.setAllowGravity(false);
+            enemy.body.setAllowGravity(false);
         }
 
         // start timer to release enemies into game
@@ -73,9 +73,10 @@ export default class EnemyManager {
             enemy.playerCollider = this._scene.physics.add.collider(enemy, this._player.sprite, (enemy, player) => {
                 if (enemy.active) this._player.hurtMe();
             });
+
             // setup collider with player's bullet
-            enemy.bulletCollider = this._scene.physics.add.collider(enemy, this._player.laserSprite, (enemy, bullet) => {
-                if ((enemy.active) && (bullet.active)) this.killMe(enemy, bullet);
+            enemy.bulletCollider = this._scene.physics.add.collider(enemy, this._player.bulletsGroup, (e, b) => {
+                if ((e.active) && (b.active)) this.killMe(e, b);
             });  
             
             this._enemyCount++;
@@ -85,7 +86,6 @@ export default class EnemyManager {
         for (let testy of this._enemies.children.entries) {
             console.log(testy.active);
         }
-
     }
 
     killMe(enemy, bullet) {
@@ -95,7 +95,7 @@ export default class EnemyManager {
         enemy.setCollideWorldBounds(false);
         enemy.x = -1000;
         enemy.body.setAllowGravity(false);
-        this._player.killLaser();
+        this._player.removeBullet(bullet);
         this._enemyCount--;
         // an enemy has been killed!
         this._emitter.emit("GameEvent","EnemyKilled");

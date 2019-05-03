@@ -88,15 +88,10 @@ export default class GameScene extends Phaser.Scene {
         if (this._cursors.up.isDown) this._player.jump();
 
         // monitor player shooting
-        //if ((this._fireKey.isDown) && (this._cursors.right.isDown)) this._player.fireRight();
-        //else if ((this._fireKey.isDown) && (this._cursors.left.isDown)) this._player.fireLeft();
-        //else if ((this._fireKey.isDown) && (this._cursors.up.isDown)) this._player.fireUp();
-        //else if (this._fireKey.isDown) this._player.fireUp();
-
         if (this._fireKey.isDown) this._player.fire();
 
+        // game object updates
         this._player.update();
-
     }
 
     //--------------------------------------------------------------- event handlers

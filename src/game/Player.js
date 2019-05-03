@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { START_HEALTH, HEALTH_FOR_HIT, BULLET_SPEED } from "./Globals";
+import { START_HEALTH, HEALTH_FOR_HIT, BULLET_SPEED, DELAY_BETWEEN_BULLETS, BULLET_MAX } from "./Globals";
 
 export default class Player {
 
@@ -9,11 +9,16 @@ export default class Player {
         this._platformManager = platformManager;
         this._emitter = emitter;
         this._sprite = null;
-        this._bullet = null;
+        this._bullets = null;
         this._health = START_HEALTH;
         this._immune = false;
+        this._reloaded = true;
+        this._bulletCount = 0;
 
         this._lastDirection = 1;
+
+        this._bulletTimer = null;
+        this._immuneTimer = null;
     }
 
     // ----------------------------------------------- get/sets
@@ -21,8 +26,8 @@ export default class Player {
         return this._sprite;
     }
 
-    get laserSprite() {
-        return this._bullet;
+    get bulletsGroup() {
+        return this._bullets;
     }
 
     get health() {
@@ -31,13 +36,18 @@ export default class Player {
 
     // ----------------------------------------------- public methods
     preload() {
-
+        // group of bullets
+        this._bullets = this._scene.physics.add.group();
     }
 
     setup() {
         // initialization
         this._immune = false;
         this._health = START_HEALTH;
+        this._reloaded = true;
+        this._bulletCount = 0;
+        window.clearInterval(this._immuneTimer);
+        window.clearInterval(this._bulletTimer);
 
         // add sprite to game as physics sprite
         this._sprite = this._assetManager.addSprite(100, 450, "player/pixil-frame-4", "main", true);
@@ -47,18 +57,17 @@ export default class Player {
         // setup collider between all platforms and the player
         this._platformManager.setupCollider(this._sprite);
 
-
-        // group of laser bolts
-        //this.bullets = this.physics.add.group();
-
-
-        // add laser sprite to game
-        this._bullet = this._assetManager.addSprite(0, 1, "misc/bullet", "main", true);
-        this._bullet.body.setAllowGravity(false);
-        this._bullet.setActive(false);
-        this._bullet.x = -1000;
-
-        this._platformManager.setupCollider(this._bullet, () => {this.killLaser();});
+        for (let n=0; n<3; n++) {
+            // add bullet sprites to game
+            let bullet = this._assetManager.addSprite(0, 1, "misc/bullet", "main", true);
+            bullet.setActive(false);
+            bullet.x = -1000;
+            // add new bullet sprite to group
+            this._bullets.add(bullet);
+            // setup collider
+            this._platformManager.setupCollider(bullet, (b,p) => {this.removeBullet(b);});
+        }
+        
     }
 
     moveLeft() {
@@ -86,47 +95,64 @@ export default class Player {
     }
 
     fire() {
-        if (this._bullet.active) return;
 
-        // fire in direction last moved
-        if (this._lastDirection == 1) {
-            this._bullet.setVelocityY(0);
-            this._bullet.setVelocityX(BULLET_SPEED);
-        } else {
-            this._bullet.setVelocityY(0);
-            this._bullet.setVelocityX(-BULLET_SPEED);
+        console.log("FIRE: " + this._bulletCount + " : " + this._reloaded);
+
+        if ((!this._reloaded) || (this._bulletCount >= BULLET_MAX)) return;
+        this._reloaded = false;
+        this._bulletCount++;
+
+        // get bullet from pool and position where player is
+        let bullet = this._bullets.get(this._sprite.x, this._sprite.y + 6);
+        if (bullet) {
+            bullet.body.setAllowGravity(false);
+            // fire in direction last moved
+            if (this._lastDirection == 1) {
+                bullet.setVelocityY(0);
+                bullet.setVelocityX(BULLET_SPEED);
+            } else {
+                bullet.setVelocityY(0);
+                bullet.setVelocityX(-BULLET_SPEED);
+            }
+            // bring player to top so laser is behind
+            this._scene.children.bringToTop(this._sprite);
+            // make it visible and play animation
+            bullet.setActive(true);
+            bullet.visible = true;
+
+            // hack : using the old reliable setInterval to get this done
+            window.clearInterval(this._bulletTimer);
+            this._bulletTimer = window.setInterval(() => {
+                this._reloaded = true;
+                window.clearInterval(this._bulletTimer);
+            }, DELAY_BETWEEN_BULLETS);
         }
-
-        // position laser bolt with player
-        this._bullet.x = this._sprite.x;
-        this._bullet.y = this._sprite.y + 6;
-        // bring player to top so laser is behind
-        this._scene.children.bringToTop(this._sprite);
-
-        // make it visible and play animation
-        this._bullet.setActive(true);
-        this._bullet.visible = true;
     }
 
     update() {
-        // check if laser off the stage
-        if (this._bullet.active) {
-            if ((this._bullet.x > 600) || (this._bullet.x < 0)) {
-                this.killLaser();
+        // check if any bullets off the stage
+        this._bullets.children.each((bullet) => {
+            if (bullet.active) {
+                if ((bullet.x > 600) || (bullet.x < 0)) {
+                    this.removeBullet(bullet);
+                }
             }
-        }
+        });
 
         // hack : fixing issue with player being bumped below the bottom platforms
         if (this._sprite.y > 543) this._sprite.y = 543;
     }
 
-    killLaser() {
-        if (this._bullet.active) {
-            console.log("_killLaser");
-            this._bullet.setActive(false);
-            this._bullet.setVelocityX(0);
-            this._bullet.visible = false;
-            this._bullet.x = -1000;
+    removeBullet(bullet) {
+        if (bullet.active) {
+            console.log("_removeBullet");
+            bullet.setActive(false);
+            bullet.x = -1000;
+            bullet.setVelocityX(0);
+            bullet.visible = false;
+
+            this._bulletCount--;
+            //this._reloaded = true;
         }
     }
 
@@ -161,12 +187,12 @@ export default class Player {
         if (this._health <= 0) {
             this._killMe();
         } else {
-            this._scene.time.delayedCall(500, () => {
-                this._immune = false;
-                console.log("no immune anymore");
-            });
+            window.clearInterval(this._immuneTimer);
+            this._immuneTimer = window.setInterval(() => {
+                this._immune = true;
+                window.clearInterval(this._immuneTimer);
+            }, 500);
         }
-
     }
 
     // -------------------------------------------------- private methods
