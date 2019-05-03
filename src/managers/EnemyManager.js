@@ -84,6 +84,7 @@ export default class EnemyManager {
         enemy.setActive(false);
         enemy.setVisible(false);
         enemy.bulletCollider.destroy();
+        enemy.setCollideWorldBounds(false);
         enemy.x = -1000;
         enemy.body.setAllowGravity(false);
         this._player.killLaser();

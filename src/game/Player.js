@@ -115,13 +115,16 @@ export default class Player {
                 this.killLaser();
             }
         }
+
+        // hack : fixing issue with player being bumped below the bottom platforms
+        if (this._sprite.y > 543) this._sprite.y = 543;
     }
 
     killLaser() {
         if (this._bullet.active) {
             console.log("_killLaser");
             this._bullet.setActive(false);
-            //this._laser.disableBody(true, true);
+            this._bullet.setVelocityX(0);
             this._bullet.visible = false;
             this._bullet.x = -1000;
         }
