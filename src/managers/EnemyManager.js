@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-import { STARTING_ENEMY_INTERVAL, ENEMY_INTERVAL_DECREASE } from "./../game/Globals";
+import { STARTING_ENEMY_INTERVAL, ENEMY_INTERVAL_DECREASE, STARTING_MAX_ENEMIES, MAX_ENEMIES_INCREASE } from "./../game/Globals";
 
 export default class EnemyManager {
 
@@ -12,6 +12,8 @@ export default class EnemyManager {
         this._enemies = null;
         this._emitter = emitter;
         this._enemyDelay = STARTING_ENEMY_INTERVAL;
+        this._maxEnemies = STARTING_MAX_ENEMIES;
+        this._enemyCount = 0;
     }
 
     // ----------------------------------------------- public methods
@@ -23,6 +25,8 @@ export default class EnemyManager {
     setup() {
         // initialization
         this._enemyDelay = STARTING_ENEMY_INTERVAL;
+        this._maxEnemies = STARTING_MAX_ENEMIES;
+        this._enemyCount = 0;
 
         // create object pool of enemies
         for (let n=0; n<50; n++) {
@@ -48,6 +52,8 @@ export default class EnemyManager {
     }
 
     release() {
+        if (this._enemyCount >= this._maxEnemies) return;
+
         // pick random x location of bomb to be released away from the player
         let x = (this._player.sprite.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
@@ -70,7 +76,9 @@ export default class EnemyManager {
             // setup collider with player's bullet
             enemy.bulletCollider = this._scene.physics.add.collider(enemy, this._player.laserSprite, (enemy, bullet) => {
                 if ((enemy.active) && (bullet.active)) this.killMe(enemy, bullet);
-            });   
+            });  
+            
+            this._enemyCount++;
         }
 
         console.log("----object pool test--------------");
@@ -88,13 +96,17 @@ export default class EnemyManager {
         enemy.x = -1000;
         enemy.body.setAllowGravity(false);
         this._player.killLaser();
+        this._enemyCount--;
         // an enemy has been killed!
         this._emitter.emit("GameEvent","EnemyKilled");
+        // restart the timer
+        this._startTimer();
     }
 
     levelUp() {
         // decrease delay between enemy drops
         this._enemyDelay -= ENEMY_INTERVAL_DECREASE;
+        this._maxEnemies += MAX_ENEMIES_INCREASE;
         this._startTimer();
     }
 
@@ -108,8 +120,4 @@ export default class EnemyManager {
             callbackScope: this
         });
     }
-
-    // TODO add maximum number of enemies added - but increase with level up
-
-
 }
