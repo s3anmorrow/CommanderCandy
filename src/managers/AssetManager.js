@@ -24,7 +24,7 @@ export default class AssetManager {
         }
     }
 
-    registerAnimation(spritesheetID, animationID, startFrame, endFrame, prefix = "", doesLoop = false) {
+    registerAnimation(spritesheetID, animationID, startFrame, endFrame, prefix = "", doesLoop = false, rate = 10) {
         // create an animation sequence called walk from spritesheet with defined frames
         this._scene.anims.create({
             key: animationID,
@@ -33,7 +33,7 @@ export default class AssetManager {
                 zeroPad: 0,
                 prefix: prefix, suffix: ''
             }),
-            frameRate: 10,
+            frameRate: rate,
             yoyo:doesLoop,
             repeat: -1
         });

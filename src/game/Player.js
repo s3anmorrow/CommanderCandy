@@ -50,7 +50,7 @@ export default class Player {
         window.clearInterval(this._bulletTimer);
 
         // add sprite to game as physics sprite
-        this._sprite = this._assetManager.addSprite(100, 450, "player/pixil-frame-4", "main", true);
+        this._sprite = this._assetManager.addSprite(100, 450, "player/idle/pixil-frame-0", "main", true);
         this._sprite.body.setGravityY(300);
         this._sprite.setBounce(0.2);
         this._sprite.setCollideWorldBounds(true);
@@ -67,31 +67,30 @@ export default class Player {
             // setup collider
             this._platformManager.setupCollider(bullet, (b,p) => {this.removeBullet(b);});
         }
-        
     }
 
     moveLeft() {
         this._sprite.setVelocityX(-160);
-        this._sprite.anims.play('walk', true);
         this._lastDirection = 0;
+        this._sprite.anims.play('player-walk-left', true);
     }
 
     moveRight() {
         this._sprite.setVelocityX(160);
-        this._sprite.anims.play('walk', true);
         this._lastDirection = 1;
+        this._sprite.anims.play('player-walk-right', true);
     }
 
     stop() {
         this._sprite.setVelocityX(0);
-        this._sprite.anims.play('walk');
+        this._sprite.anims.play('player-idle', true);
     }
 
     jump() {
         if (this._sprite.body.touching.down) {
             this._sprite.setVelocityY(-330);
-            this._sprite.anims.play('walk');
         }
+        this._sprite.anims.play('player-jump', true);
     }
 
     fire() {
@@ -189,7 +188,7 @@ export default class Player {
         } else {
             window.clearInterval(this._immuneTimer);
             this._immuneTimer = window.setInterval(() => {
-                this._immune = true;
+                this._immune = false;
                 window.clearInterval(this._immuneTimer);
             }, 500);
         }
@@ -200,7 +199,13 @@ export default class Player {
         console.log("IT KILLS!!!");
 
         // TODO - play animation of player getting hurt
+        this._scene.physics.pause();
+        //this._sprite.anims.stop();
+        this._sprite.anims.play('player-killed', true);
 
         this._emitter.emit("GameEvent","PlayerKilled");
     }
+
+    // TODO still has issue of player being bumped below platforms
+
 }

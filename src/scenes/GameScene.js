@@ -19,6 +19,7 @@ export default class GameScene extends Phaser.Scene {
         this._cursors = null;
         this._bombs = null;
         this._gameOver = false;
+        this._gameOn = true;
         
         // custom event dispatcher object - passed into to objects that need to dispatch
         this._emitter = new Phaser.Events.EventEmitter();
@@ -37,8 +38,6 @@ export default class GameScene extends Phaser.Scene {
     // ----------------------------------- scene methods
     // each scene has its own displaylist
     preload() {
-        //this.load.path = './assets/';
-
         // manager object preload stage setup
         //this._assetManager.preload();
         this._userInterface.preload();
@@ -52,13 +51,20 @@ export default class GameScene extends Phaser.Scene {
         // guaranteed all assets loaded when in this scene function
 
         // initialization
+        this._gameOn = true;
 
         console.log("gameScene create");
 
         // register all animations of game for use
-        this._assetManager.registerAnimation("main", "walk", 0, 4, "player/pixil-frame-", true);
+        this._assetManager.registerAnimation("main", "player-idle", 0, 1, "player/idle/pixil-frame-", true, 1);
+        this._assetManager.registerAnimation("main", "player-walk-left", 0, 2, "player/walk-left/pixil-frame-", true);
+        this._assetManager.registerAnimation("main", "player-walk-right", 0, 2, "player/walk-right/pixil-frame-", true);
+        this._assetManager.registerAnimation("main", "player-jump", 0, 0, "player/jump/pixil-frame-", true);
+        this._assetManager.registerAnimation("main", "player-killed", 0, 7, "player/killed/pixil-frame-", true);
+
+
+        this._assetManager.registerAnimation("main", "walk", 0, 1, "player/idle/pixil-frame-", true);
         this._assetManager.registerAnimation("main", "enemyWaddle", 0, 2, "enemies/pixil-frame-", true);
-        this._assetManager.registerAnimation("main", "laser", 0, 3, "laser/pixil-frame-", true);
 
         // other setups
         this._userInterface.setup();
@@ -77,7 +83,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     update() {
-        if (!this._game.scene.isActive("game")) return;
+        if (!this._game.scene.isActive("game") || (!this._gameOn)) return;
 
         // monitor player movement
         if (this._cursors.left.isDown) this._player.moveLeft();
@@ -116,9 +122,11 @@ export default class GameScene extends Phaser.Scene {
                 // TODO pause all physics and play death animation
                 //this.physics.pause();
 
+                this._gameOn = false;
+
                 // stop the game
-                this._game.scene.stop("game");
-                this._game.scene.start("gameover");
+                // this._game.scene.stop("game");
+                // this._game.scene.start("gameover");
                 break;
         }
     }

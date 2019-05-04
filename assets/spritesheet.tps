@@ -70,7 +70,7 @@
             </struct>
         </struct>
         <key>shapePadding</key>
-        <uint>1</uint>
+        <uint>0</uint>
         <key>jpgQuality</key>
         <uint>80</uint>
         <key>pngOptimizationLevel</key>
@@ -106,9 +106,9 @@
             <key>freeSizeMode</key>
             <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Best</enum>
             <key>sizeConstraints</key>
-            <enum type="AlgorithmSettings::SizeConstraints">AnySize</enum>
+            <enum type="AlgorithmSettings::SizeConstraints">POT</enum>
             <key>forceSquared</key>
-            <false/>
+            <true/>
             <key>maxRects</key>
             <struct type="AlgorithmMaxRectsSettings">
                 <key>heuristic</key>
@@ -165,7 +165,7 @@
             <key>extrude</key>
             <uint>0</uint>
             <key>trimThreshold</key>
-            <uint>100</uint>
+            <uint>1</uint>
             <key>trimMargin</key>
             <uint>0</uint>
             <key>trimMode</key>
@@ -177,37 +177,33 @@
             <key>defaultPivotPoint</key>
             <point_f>0.5,0.5</point_f>
             <key>writePivotPoints</key>
-            <true/>
+            <false/>
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">spritesheets/enemies/pixil-frame-0.png</key>
             <key type="filename">spritesheets/enemies/pixil-frame-1.png</key>
             <key type="filename">spritesheets/enemies/pixil-frame-2.png</key>
-            <key type="filename">spritesheets/player/pixil-frame-0.png</key>
-            <key type="filename">spritesheets/player/pixil-frame-1.png</key>
-            <key type="filename">spritesheets/player/pixil-frame-2.png</key>
-            <key type="filename">spritesheets/player/pixil-frame-3.png</key>
-            <key type="filename">spritesheets/player/pixil-frame-4.png</key>
+            <key type="filename">spritesheets/player/idle/pixil-frame-0.png</key>
+            <key type="filename">spritesheets/player/idle/pixil-frame-1.png</key>
+            <key type="filename">spritesheets/player/jump/pixil-frame-0.png</key>
+            <key type="filename">spritesheets/player/killed/pixil-frame-0.png</key>
+            <key type="filename">spritesheets/player/killed/pixil-frame-1.png</key>
+            <key type="filename">spritesheets/player/killed/pixil-frame-2.png</key>
+            <key type="filename">spritesheets/player/killed/pixil-frame-3.png</key>
+            <key type="filename">spritesheets/player/killed/pixil-frame-4.png</key>
+            <key type="filename">spritesheets/player/killed/pixil-frame-5.png</key>
+            <key type="filename">spritesheets/player/killed/pixil-frame-6.png</key>
+            <key type="filename">spritesheets/player/killed/pixil-frame-7.png</key>
+            <key type="filename">spritesheets/player/walk-left/pixil-frame-0.png</key>
+            <key type="filename">spritesheets/player/walk-left/pixil-frame-1.png</key>
+            <key type="filename">spritesheets/player/walk-left/pixil-frame-2.png</key>
+            <key type="filename">spritesheets/player/walk-right/pixil-frame-0.png</key>
+            <key type="filename">spritesheets/player/walk-right/pixil-frame-1.png</key>
+            <key type="filename">spritesheets/player/walk-right/pixil-frame-2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>15,15,30,30</rect>
-                <key>scale9Paddings</key>
-                <rect>15,15,30,30</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">spritesheets/laser/pixil-frame-0.png</key>
-            <key type="filename">spritesheets/laser/pixil-frame-1.png</key>
-            <key type="filename">spritesheets/laser/pixil-frame-2.png</key>
-            <key type="filename">spritesheets/laser/pixil-frame-3.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -224,16 +220,16 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>3,3,5,5</rect>
+                <rect>2,2,4,4</rect>
                 <key>scale9Paddings</key>
-                <rect>3,3,5,5</rect>
+                <rect>2,2,4,4</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
             <key type="filename">spritesheets/misc/healthBorder.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0,0</point_f>
+                <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -256,19 +252,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">spritesheets/platform/platformBase.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>150,8,300,15</rect>
-                <key>scale9Paddings</key>
-                <rect>150,8,300,15</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">spritesheets/platform/platformBlue.png</key>
             <key type="filename">spritesheets/platform/platformGreen.png</key>
             <key type="filename">spritesheets/platform/platformOrange.png</key>
@@ -276,7 +259,7 @@
             <key type="filename">spritesheets/platform/platformSilver.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0,0</point_f>
+                <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
