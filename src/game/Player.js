@@ -59,9 +59,8 @@ export default class Player {
 
         for (let n=0; n<3; n++) {
             // add bullet sprites to game
-            let bullet = this._assetManager.addSprite(0, 1, "misc/bullet", "main", true);
+            let bullet = this._assetManager.addSprite(-1000, 0, "misc/bullet", "main", true);
             bullet.setActive(false);
-            bullet.x = -1000;
             // add new bullet sprite to group
             this._bullets.add(bullet);
             // setup collider
@@ -102,7 +101,7 @@ export default class Player {
         this._bulletCount++;
 
         // get bullet from pool and position where player is
-        let bullet = this._bullets.get(this._sprite.x, this._sprite.y + 6);
+        let bullet = this._bullets.get(this._sprite.x + 15, this._sprite.y + 30);
         if (bullet) {
             bullet.body.setAllowGravity(false);
             // fire in direction last moved

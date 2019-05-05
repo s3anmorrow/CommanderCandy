@@ -62,6 +62,10 @@ export default class GameScene extends Phaser.Scene {
         this._assetManager.registerAnimation("main", "player-jump", 0, 0, "player/jump/pixil-frame-", true);
         this._assetManager.registerAnimation("main", "player-killed", 0, 7, "player/killed/pixil-frame-", true);
 
+        this._assetManager.registerAnimation("main", "enemy-idle", 0, 3, "enemy/idle/pixil-frame-", true, 5);
+        this._assetManager.registerAnimation("main", "enemy-killed", 0, 7, "enemy/killed/pixil-frame-", false, 5, 0);
+
+
 
         this._assetManager.registerAnimation("main", "walk", 0, 1, "player/idle/pixil-frame-", true);
         this._assetManager.registerAnimation("main", "enemyWaddle", 0, 2, "enemies/pixil-frame-", true);

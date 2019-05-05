@@ -34,7 +34,7 @@ export default class EnemyManager {
             let x = (this._player.sprite.x < 300) ? Phaser.Math.Between(50, 550) : Phaser.Math.Between(0, 400);
 
             // add sprite to game as physics sprite
-            let enemy = this._assetManager.addSprite(-1000, -50, "enemies/pixil-frame-0", "main", true);
+            let enemy = this._assetManager.addSprite(-1000, -50, "enemy/idle/pixil-frame-0", "main", true);
             enemy.setActive(false);
             enemy.setVisible(false);
 
@@ -59,7 +59,7 @@ export default class EnemyManager {
 
         let enemy = this._enemies.get(x, -30);
         if (enemy) {
-            enemy.anims.play("enemyWaddle");
+            enemy.anims.play("enemy-idle", true);
             enemy.setBounce(1);
             enemy.setCollideWorldBounds(true);
             enemy.setActive(true);
@@ -89,16 +89,32 @@ export default class EnemyManager {
     }
 
     killMe(enemy, bullet) {
-        enemy.setActive(false);
-        enemy.setVisible(false);
-        enemy.bulletCollider.destroy();
-        enemy.setCollideWorldBounds(false);
-        enemy.x = -1000;
-        enemy.body.setAllowGravity(false);
+        // remove the bullet
         this._player.removeBullet(bullet);
-        this._enemyCount--;
-        // an enemy has been killed!
-        this._emitter.emit("GameEvent","EnemyKilled");
+
+        // disabling enemy for death animation
+        enemy.setVelocity(0,0);
+        enemy.setBounce(0);
+        enemy.bulletCollider.destroy();
+
+        // play killed animation
+        enemy.anims.play("enemy-killed", true);
+
+        // listen for end (have to play first)
+        enemy.on("animationcomplete", () => {
+            console.log("ANIMATON IS COMPLETE!");
+            
+            enemy.setActive(false);
+            enemy.setVisible(false);
+            enemy.setCollideWorldBounds(false);
+            enemy.x = -1000;
+            enemy.body.setAllowGravity(false);
+            // decrease number of enemies
+            this._enemyCount--;
+            // an enemy has been killed!
+            this._emitter.emit("GameEvent","EnemyKilled");
+        });
+        
         // restart the timer
         this._startTimer();
     }
