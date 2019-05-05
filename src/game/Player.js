@@ -101,7 +101,7 @@ export default class Player {
         this._bulletCount++;
 
         // get bullet from pool and position where player is
-        let bullet = this._bullets.get(this._sprite.x + 15, this._sprite.y + 30);
+        let bullet = this._bullets.get(this._sprite.x + 2, this._sprite.y + 2);
         if (bullet) {
             bullet.body.setAllowGravity(false);
             // fire in direction last moved
@@ -206,5 +206,7 @@ export default class Player {
     }
 
     // TODO still has issue of player being bumped below platforms
+    // TODO add player at specific spot on each level
+    // TODO player can get hurt by enemy dying
 
 }

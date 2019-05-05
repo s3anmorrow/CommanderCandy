@@ -1,5 +1,4 @@
 import { levelManifest } from "../manifests/LevelManifest";
-
 import { STARTING_LEVEL } from "../game/Globals";
 
 export default class PlatformManager {
@@ -30,9 +29,7 @@ export default class PlatformManager {
     }
 
     levelUp() {
-        if (this._level < levelManifest.length) {
-            this._level++;
-        }
+        if (this._level < levelManifest.length) this._level++;
 
         console.log("level: " + this._level);
 
@@ -53,8 +50,6 @@ export default class PlatformManager {
                 this._scene.physics.resume();
             }
         });
-
-        
     }
 
     setupCollider(gameObject, onCollision = null) {

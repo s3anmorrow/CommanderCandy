@@ -104,6 +104,7 @@ export default class EnemyManager {
         enemy.on("animationcomplete", () => {
             console.log("ANIMATON IS COMPLETE!");
             
+            enemy.removeAllListeners();
             enemy.setActive(false);
             enemy.setVisible(false);
             enemy.setCollideWorldBounds(false);

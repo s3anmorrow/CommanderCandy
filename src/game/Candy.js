@@ -24,7 +24,7 @@ export default class Candy {
 
     setup() {
         // add sprite to game as physics sprite
-        this._sprite = this._assetManager.addSprite(0, 0, "pickups/candy", "main", true);
+        this._sprite = this._assetManager.addSprite(0, 0, "candy/idle/pixil-frame-0", "main", true);
         this._sprite.setActive(false);
         this._sprite.setVisible(false);
         // release initial candy after setup complete
@@ -34,6 +34,9 @@ export default class Candy {
     release() {
         this._sprite.setActive(true);
         this._sprite.setVisible(true);
+        this._sprite.anims.play("candy-idle", true);
+
+        // TODO make candy drop in designated place on map
 
         // randomization sets
         // pick random x location of bomb to be released away from the player
@@ -50,13 +53,18 @@ export default class Candy {
 
     // ------------------------------------------------ private methods
     _pickup() {
-        // TODO play animation of candy being picked up
-
         this._playerCandyCollider.destroy();
-        this._sprite.setActive(false);
-        this._sprite.setVisible(false);
-        this.release();
-        this._emitter.emit("GameEvent","CandyPickup");
+        //this._sprite.y = this._sprite.y + 5;
+        this._sprite.anims.play("candy-killed", true);
+
+        // listen for end (have to play first)
+        this._sprite.on("animationcomplete", () => {
+            this._sprite.removeAllListeners();
+            this._sprite.setActive(false);
+            this._sprite.setVisible(false);
+            this.release();
+            this._emitter.emit("GameEvent","CandyPickup");
+        });
     }
 
 }
