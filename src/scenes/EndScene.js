@@ -20,7 +20,12 @@ export default class EndScene extends Phaser.Scene {
     create() {
         // add game objects to the scene
         this._assetManager.addImage(0, 0, "screenGameOver");
-        this._btnPlayAgain = this._assetManager.addSprite(230, 500, "btnPlayAgain").setInteractive();
+        
+        this._enemy = this._assetManager.addSprite(300, 302, "enemy/idle/pixil-frame-0", "main", true);
+        this._enemy.body.setGravityY(-300);
+        this._enemy.anims.play('enemy-idle', true);
+
+        this._btnPlayAgain = this._assetManager.addSprite(240, 350, "btnPlayAgain").setInteractive();
 
         // add event listners to button
         this._btnPlayAgain.on("pointerover", () => {

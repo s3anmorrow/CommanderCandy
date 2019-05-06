@@ -235,6 +235,8 @@ export default class Player {
         });
     }
 
-    // TODO still has issue of player being bumped below platforms
+    // TODO: still has issue of player being bumped below platforms
+    // TODO: candy falls when picked up
+    // TODO: hurt animation for player
 
 }

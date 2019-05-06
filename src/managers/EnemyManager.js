@@ -100,6 +100,7 @@ export default class EnemyManager {
         enemy.setVelocity(0,0);
         enemy.setBounce(0);
         enemy.bulletCollider.destroy();
+        enemy.playerCollider.destroy();
 
         // play killed animation
         enemy.anims.play("enemy-killed", true);

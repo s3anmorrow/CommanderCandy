@@ -1,3 +1,4 @@
+// eight levels
 let levelManifest = [
     [
         "-------C--",

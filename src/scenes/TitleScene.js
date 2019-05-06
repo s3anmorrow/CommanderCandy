@@ -126,7 +126,7 @@ export default class GameScene extends Phaser.Scene {
 
         this._enemy = this._assetManager.addSprite(391, 255, "enemy/idle/pixil-frame-0", "main", true);
         this._enemy.body.setGravityY(-300);
-        this._enemy.anims.play('enemy-idle', true);        
+        this._enemy.anims.play('enemy-idle', true);
 
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         this._test = this._assetManager.addSound("test");
