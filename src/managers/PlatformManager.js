@@ -3,15 +3,31 @@ import { STARTING_LEVEL } from "../game/Globals";
 
 export default class PlatformManager {
 
-    constructor(scene, assetManager) {
+    constructor(scene, assetManager, emitter) {
         this._scene = scene;
         this._assetManager = assetManager;
         this._platforms = null;
         this._level = STARTING_LEVEL;
+        this._candyX = 0;
+        this._playerX = 0;
+        this._playerY = 0;
+        this._emitter = emitter;
     }
 
     get platforms() {
         return this._platforms;
+    }
+
+    get candyX() {
+        return this._candyX;
+    }
+
+    get playerX() {
+        return this._playerX;
+    }
+
+    get playerY() {
+        return this._playerY;
     }
 
     // ------------------------------------------------------ public methods
@@ -48,6 +64,7 @@ export default class PlatformManager {
             onComplete: () => {
                 this._buildLevel();
                 this._scene.physics.resume();
+                this._emitter.emit("GameEvent","LevelReady");
             }
         });
     }
@@ -78,13 +95,19 @@ export default class PlatformManager {
                     else if (cellData.toUpperCase() == "O") type = "Orange";
                     else if (cellData.toUpperCase() == "G") type = "Green";
                     else if (cellData.toUpperCase() == "S") type = "Silver";
-
-                    this._platforms.add(this._assetManager.addSprite(
-                        col * 60,
-                        row * 30,
-                        "platform/platform" + type,
-                        "main"
-                    ));
+                    else if (cellData.toUpperCase() == "C") this._candyX = col * 60;
+                    else if (cellData.toUpperCase() == "P") {
+                        this._playerX = col * 60 + 30;
+                        this._playerY = row * 30;
+                    }
+                    if ((cellData.toUpperCase() != "C") && (cellData.toUpperCase() != "P")) {
+                        this._platforms.add(this._assetManager.addSprite(
+                            col * 60,
+                            row * 30,
+                            "platform/platform" + type,
+                            "main"
+                        ));
+                    }
                 }
             }
         }

@@ -39,6 +39,23 @@ export default class AssetManager {
         });
     }
 
+    // TODO fix up this method to use a generic object
+    
+    // registerAnimation(spritesheetID, animationID, startFrame, endFrame, prefix = "", doesLoop = false, rate = 10, repeat = -1) {
+    //     // create an animation sequence called walk from spritesheet with defined frames
+    //     this._scene.anims.create({
+    //         key: animationID,
+    //         frames: this._scene.anims.generateFrameNames(spritesheetID,{
+    //             start:startFrame, end:endFrame,
+    //             zeroPad: 0,
+    //             prefix: prefix, suffix: ''
+    //         }),
+    //         frameRate: rate,
+    //         yoyo:doesLoop,
+    //         repeat: repeat
+    //     });
+    // }
+
     addSprite(x, y, frameID, spritesheetID = undefined, physics = false) {
         // adding sprite based on loaded image
         if (spritesheetID == undefined) return this._scene.add.sprite(x, y, frameID).setOrigin(0, 0);

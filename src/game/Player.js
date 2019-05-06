@@ -50,7 +50,10 @@ export default class Player {
         window.clearInterval(this._bulletTimer);
 
         // add sprite to game as physics sprite
-        this._sprite = this._assetManager.addSprite(100, 450, "player/idle/pixil-frame-0", "main", true);
+        this._sprite = this._assetManager.addSprite(
+            this._platformManager.playerX, 
+            this._platformManager.playerY, 
+            "player/idle/pixil-frame-0", "main", true);
         this._sprite.body.setGravityY(300);
         this._sprite.setBounce(0.2);
         this._sprite.setCollideWorldBounds(true);
@@ -145,7 +148,7 @@ export default class Player {
                 }
             }
         });
-
+        
         // hack : fixing issue with player being bumped below the bottom platforms
         if (this._sprite.y > 543) this._sprite.y = 543;
     }
@@ -201,6 +204,11 @@ export default class Player {
         }
     }
 
+    release() {
+        this._sprite.x = this._platformManager.playerX;
+        this._sprite.y = this._platformManager.playerY;
+    }
+
     // -------------------------------------------------- private methods
     _killMe() {
         console.log("IT KILLS!!!");
@@ -221,7 +229,5 @@ export default class Player {
     }
 
     // TODO still has issue of player being bumped below platforms
-    // TODO add player at specific spot on each level
-    // TODO player can get hurt by enemy dying
 
 }

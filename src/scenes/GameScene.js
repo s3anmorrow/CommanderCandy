@@ -29,7 +29,7 @@ export default class GameScene extends Phaser.Scene {
 
         // constructing other managers and pass in Scene object / assetManager
         this._userInterface = new UserInterface(this, this._assetManager);
-        this._platformManager = new PlatformManager(this, this._assetManager);
+        this._platformManager = new PlatformManager(this, this._assetManager, this._emitter);
         this._player = new Player(this, this._assetManager, this._platformManager, this._emitter);
         this._candy = new Candy(this, this._assetManager, this._platformManager, this._emitter, this._player);
         this._enemyManager = new EnemyManager(this, this._assetManager, this._platformManager, this._emitter, this._player);
@@ -120,13 +120,14 @@ export default class GameScene extends Phaser.Scene {
                 this._platformManager.levelUp();
                 this._enemyManager.levelUp();
                 break;
+            case "LevelReady":
+                this._candy.release();
+                this._player.release();
+                break;
             case "PlayerHurt":
                 this._userInterface.updateHealth(this._player.health);
                 break;
             case "PlayerKilled":
-                // TODO pause all physics and play death animation
-                //this.physics.pause();
-
                 this._gameOn = false;
                 break;
             case "GameOver":

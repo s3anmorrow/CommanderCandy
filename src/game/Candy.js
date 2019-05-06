@@ -36,12 +36,8 @@ export default class Candy {
         this._sprite.setVisible(true);
         this._sprite.anims.play("candy-idle", true);
 
-        // TODO make candy drop in designated place on map
-
-        // randomization sets
-        // pick random x location of bomb to be released away from the player
-        let x = (this._player.sprite.x < 300) ? Phaser.Math.Between(300, 550) : Phaser.Math.Between(50, 300);
-        this._sprite.x = x;
+        // setting x and y location of candy drop
+        this._sprite.x = this._platformManager.candyX;
         this._sprite.y = -30;
 
         this._sprite.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
@@ -61,7 +57,6 @@ export default class Candy {
             this._sprite.removeAllListeners();
             this._sprite.setActive(false);
             this._sprite.setVisible(false);
-            this.release();
             this._emitter.emit("GameEvent","CandyPickup");
         });
     }

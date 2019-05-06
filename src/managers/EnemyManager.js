@@ -37,6 +37,7 @@ export default class EnemyManager {
             let enemy = this._assetManager.addSprite(-1000, -50, "enemy/idle/pixil-frame-0", "main", true);
             enemy.setActive(false);
             enemy.setVisible(false);
+            enemy.killed = false;
 
             // add new enemy sprite to group
             this._enemies.add(enemy);
@@ -71,13 +72,13 @@ export default class EnemyManager {
             // setup collider with platforms
             this._platformManager.setupCollider(enemy);
             // setup collider with player
-            enemy.playerCollider = this._scene.physics.add.collider(enemy, this._player.sprite, (enemy, player) => {
-                if (enemy.active) this._player.hurtMe();
+            enemy.playerCollider = this._scene.physics.add.collider(enemy, this._player.sprite, (e, p) => {
+                if ((e.active) && (!e.killed)) this._player.hurtMe();
             });
 
             // setup collider with player's bullet
             enemy.bulletCollider = this._scene.physics.add.collider(enemy, this._player.bulletsGroup, (e, b) => {
-                if ((e.active) && (b.active)) this.killMe(e, b);
+                if ((e.active) && (b.active) && (!e.killed)) this.killMe(e, b);
             });  
             
             this._enemyCount++;
@@ -90,6 +91,8 @@ export default class EnemyManager {
     }
 
     killMe(enemy, bullet) {
+        enemy.killed = true;
+
         // remove the bullet
         this._player.removeBullet(bullet);
 
@@ -113,6 +116,7 @@ export default class EnemyManager {
                     enemy.x = -1000;
                     enemy.setActive(false);
                     enemy.setVisible(false);
+                    enemy.killed = false;
                 }
             });
             
