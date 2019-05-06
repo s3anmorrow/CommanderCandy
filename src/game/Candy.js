@@ -54,7 +54,6 @@ export default class Candy {
     // ------------------------------------------------ private methods
     _pickup() {
         this._playerCandyCollider.destroy();
-        //this._sprite.y = this._sprite.y + 5;
         this._sprite.anims.play("candy-killed", true);
 
         // listen for end (have to play first)

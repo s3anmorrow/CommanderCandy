@@ -96,22 +96,31 @@ export default class Player {
 
         console.log("FIRE: " + this._bulletCount + " : " + this._reloaded);
 
+        // adjustments depending on direction player is shooting
+        let bulletX, bulletY, bulletSpeed;
+        if (this._lastDirection == 1) {
+            this._sprite.anims.play('player-shoot-right', true);
+            bulletSpeed = BULLET_SPEED;
+            bulletX = 30;
+            bulletY = -2;
+        } else {
+            this._sprite.anims.play('player-shoot-left', true);
+            bulletSpeed = -BULLET_SPEED;
+            bulletX = -38;
+            bulletY = -3;
+        }
+
         if ((!this._reloaded) || (this._bulletCount >= BULLET_MAX)) return;
         this._reloaded = false;
         this._bulletCount++;
 
         // get bullet from pool and position where player is
-        let bullet = this._bullets.get(this._sprite.x + 2, this._sprite.y + 2);
+        let bullet = this._bullets.get(this._sprite.x + bulletX, this._sprite.y + bulletY);
         if (bullet) {
             bullet.body.setAllowGravity(false);
             // fire in direction last moved
-            if (this._lastDirection == 1) {
-                bullet.setVelocityY(0);
-                bullet.setVelocityX(BULLET_SPEED);
-            } else {
-                bullet.setVelocityY(0);
-                bullet.setVelocityX(-BULLET_SPEED);
-            }
+            bullet.setVelocityY(0);
+            bullet.setVelocityX(bulletSpeed);
             // bring player to top so laser is behind
             this._scene.children.bringToTop(this._sprite);
             // make it visible and play animation
@@ -150,7 +159,6 @@ export default class Player {
             bullet.visible = false;
 
             this._bulletCount--;
-            //this._reloaded = true;
         }
     }
 
@@ -196,13 +204,20 @@ export default class Player {
     // -------------------------------------------------- private methods
     _killMe() {
         console.log("IT KILLS!!!");
-
-        // TODO - play animation of player getting hurt
+        
         this._scene.physics.pause();
-        //this._sprite.anims.stop();
-        this._sprite.anims.play('player-killed', true);
 
+        this._sprite.anims.play('player-killed', true);
         this._emitter.emit("GameEvent","PlayerKilled");
+
+        this._sprite.on("animationcomplete", () => {
+
+            console.log("player killed animation end");
+
+            //this._sprite.anims.stop();
+            this._sprite.removeAllListeners();
+            this._emitter.emit("GameEvent","GameOver");
+        });
     }
 
     // TODO still has issue of player being bumped below platforms

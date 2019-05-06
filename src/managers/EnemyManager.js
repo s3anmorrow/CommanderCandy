@@ -63,6 +63,7 @@ export default class EnemyManager {
             enemy.setBounce(1);
             enemy.setCollideWorldBounds(true);
             enemy.setActive(true);
+            enemy.alpha = 1;
             enemy.setVisible(true);
             enemy.setVelocity(Phaser.Math.Between(-200, 200), 20);
             enemy.body.setAllowGravity(true);
@@ -102,13 +103,21 @@ export default class EnemyManager {
 
         // listen for end (have to play first)
         enemy.on("animationcomplete", () => {
-            console.log("ANIMATON IS COMPLETE!");
+            // tween to fade out enemy
+            let tween = this._scene.tweens.addCounter({
+                from: 1,
+                to: 0,
+                duration: 500,
+                onUpdate: () => { enemy.alpha = tween.getValue(); },
+                onComplete: () => {
+                    enemy.x = -1000;
+                    enemy.setActive(false);
+                    enemy.setVisible(false);
+                }
+            });
             
             enemy.removeAllListeners();
-            enemy.setActive(false);
-            enemy.setVisible(false);
-            enemy.setCollideWorldBounds(false);
-            enemy.x = -1000;
+            enemy.setCollideWorldBounds(false);            
             enemy.body.setAllowGravity(false);
             // decrease number of enemies
             this._enemyCount--;

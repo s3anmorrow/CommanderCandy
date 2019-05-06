@@ -60,7 +60,9 @@ export default class GameScene extends Phaser.Scene {
         this._assetManager.registerAnimation("main", "player-walk-left", 0, 2, "player/walk-left/pixil-frame-", true);
         this._assetManager.registerAnimation("main", "player-walk-right", 0, 2, "player/walk-right/pixil-frame-", true);
         this._assetManager.registerAnimation("main", "player-jump", 0, 0, "player/jump/pixil-frame-", true);
-        this._assetManager.registerAnimation("main", "player-killed", 0, 7, "player/killed/pixil-frame-", true);
+        this._assetManager.registerAnimation("main", "player-killed", 0, 7, "player/killed/pixil-frame-", false, 10, 0);
+        this._assetManager.registerAnimation("main", "player-shoot-left", 0, 0, "player/shoot-left/pixil-frame-", false, 1);
+        this._assetManager.registerAnimation("main", "player-shoot-right", 0, 0, "player/shoot-right/pixil-frame-", false, 1);
 
         this._assetManager.registerAnimation("main", "enemy-idle", 0, 3, "enemy/idle/pixil-frame-", true, 5);
         this._assetManager.registerAnimation("main", "enemy-killed", 0, 7, "enemy/killed/pixil-frame-", false, 5, 0);
@@ -68,10 +70,6 @@ export default class GameScene extends Phaser.Scene {
         this._assetManager.registerAnimation("main", "candy-idle", 0, 0, "candy/idle/pixil-frame-", false, 5);
         this._assetManager.registerAnimation("main", "candy-killed", 0, 14, "candy/killed/pixil-frame-", false, 12, 0);
 
-
-
-        this._assetManager.registerAnimation("main", "walk", 0, 1, "player/idle/pixil-frame-", true);
-        this._assetManager.registerAnimation("main", "enemyWaddle", 0, 2, "enemies/pixil-frame-", true);
 
         // other setups
         this._userInterface.setup();
@@ -130,10 +128,11 @@ export default class GameScene extends Phaser.Scene {
                 //this.physics.pause();
 
                 this._gameOn = false;
-
+                break;
+            case "GameOver":
                 // stop the game
-                // this._game.scene.stop("game");
-                // this._game.scene.start("gameover");
+                this._game.scene.stop("game");
+                this._game.scene.start("gameover");
                 break;
         }
     }

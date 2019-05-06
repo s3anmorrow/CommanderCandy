@@ -278,6 +278,18 @@
             </struct>
             <key type="filename">spritesheets/player/idle/pixil-frame-0.png</key>
             <key type="filename">spritesheets/player/idle/pixil-frame-1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.55</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>15,15,30,30</rect>
+                <key>scale9Paddings</key>
+                <rect>15,15,30,30</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">spritesheets/player/jump/pixil-frame-0.png</key>
             <key type="filename">spritesheets/player/killed/pixil-frame-0.png</key>
             <key type="filename">spritesheets/player/killed/pixil-frame-1.png</key>
@@ -287,6 +299,9 @@
             <key type="filename">spritesheets/player/killed/pixil-frame-5.png</key>
             <key type="filename">spritesheets/player/killed/pixil-frame-6.png</key>
             <key type="filename">spritesheets/player/killed/pixil-frame-7.png</key>
+            <key type="filename">spritesheets/player/shoot/pixil-frame-0.png</key>
+            <key type="filename">spritesheets/player/shoot/pixil-frame-1.png</key>
+            <key type="filename">spritesheets/player/shoot/pixil-frame-2.png</key>
             <key type="filename">spritesheets/player/walk-left/pixil-frame-0.png</key>
             <key type="filename">spritesheets/player/walk-left/pixil-frame-1.png</key>
             <key type="filename">spritesheets/player/walk-left/pixil-frame-2.png</key>
