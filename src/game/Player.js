@@ -57,6 +57,7 @@ export default class Player {
         this._sprite.body.setGravityY(300);
         this._sprite.setBounce(0.2);
         this._sprite.setCollideWorldBounds(true);
+        this._sprite.alpha = 1;
         // setup collider between all platforms and the player
         this._platformManager.setupCollider(this._sprite);
 
@@ -148,7 +149,7 @@ export default class Player {
                 }
             }
         });
-        
+
         // hack : fixing issue with player being bumped below the bottom platforms
         if (this._sprite.y > 543) this._sprite.y = 543;
     }
@@ -219,12 +220,18 @@ export default class Player {
         this._emitter.emit("GameEvent","PlayerKilled");
 
         this._sprite.on("animationcomplete", () => {
-
-            console.log("player killed animation end");
-
-            //this._sprite.anims.stop();
             this._sprite.removeAllListeners();
-            this._emitter.emit("GameEvent","GameOver");
+
+            // tween to fade out enemy
+            let tween = this._scene.tweens.addCounter({
+                from: 1,
+                to: 0,
+                duration: 1500,
+                onUpdate: () => { this._sprite.alpha = tween.getValue(); },
+                onComplete: () => {
+                    this._emitter.emit("GameEvent","GameOver");
+                }
+            });
         });
     }
 

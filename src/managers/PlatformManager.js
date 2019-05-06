@@ -95,7 +95,7 @@ export default class PlatformManager {
                     else if (cellData.toUpperCase() == "O") type = "Orange";
                     else if (cellData.toUpperCase() == "G") type = "Green";
                     else if (cellData.toUpperCase() == "S") type = "Silver";
-                    else if (cellData.toUpperCase() == "C") this._candyX = col * 60;
+                    else if (cellData.toUpperCase() == "C") this._candyX = col * 60 + 12;
                     else if (cellData.toUpperCase() == "P") {
                         this._playerX = col * 60 + 30;
                         this._playerY = row * 30;
