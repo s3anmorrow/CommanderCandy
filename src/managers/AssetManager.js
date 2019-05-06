@@ -24,7 +24,7 @@ export default class AssetManager {
         }
     }
 
-    registerAnimation(spritesheetID, animationID, startFrame, endFrame, prefix = "", doesLoop = false, rate = 10, repeat = -1) {
+    old(spritesheetID, animationID, startFrame, endFrame, prefix = "", doesLoop = false, rate = 10, repeat = -1) {
         // create an animation sequence called walk from spritesheet with defined frames
         this._scene.anims.create({
             key: animationID,
@@ -41,20 +41,22 @@ export default class AssetManager {
 
     // TODO fix up this method to use a generic object
     
-    // registerAnimation(spritesheetID, animationID, startFrame, endFrame, prefix = "", doesLoop = false, rate = 10, repeat = -1) {
-    //     // create an animation sequence called walk from spritesheet with defined frames
-    //     this._scene.anims.create({
-    //         key: animationID,
-    //         frames: this._scene.anims.generateFrameNames(spritesheetID,{
-    //             start:startFrame, end:endFrame,
-    //             zeroPad: 0,
-    //             prefix: prefix, suffix: ''
-    //         }),
-    //         frameRate: rate,
-    //         yoyo:doesLoop,
-    //         repeat: repeat
-    //     });
-    // }
+    registerAnimation(config) {
+        let {spritesheet, animation, startFrame, endFrame, prefix = "", yoyo = false, rate = 10, repeat = -1} = config;
+
+        // create an animation sequence called walk from spritesheet with defined frames
+        this._scene.anims.create({
+            key: animation,
+            frames: this._scene.anims.generateFrameNames(spritesheet,{
+                start:startFrame, end:endFrame,
+                zeroPad: 0,
+                prefix: prefix, suffix: ''
+            }),
+            frameRate: rate,
+            yoyo:yoyo,
+            repeat: repeat
+        });
+    }
 
     addSprite(x, y, frameID, spritesheetID = undefined, physics = false) {
         // adding sprite based on loaded image

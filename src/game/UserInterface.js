@@ -60,8 +60,8 @@ export default class UserInterface {
     _renderHealthBar() {
         this._healthBar.clear();
         let color = 0xFFFFFF;
-        if (this._health <= 3) color = 0xAA0114;
-        else if (this._health <= 5) color = 0xFFA500;
+        if (this._health <= (START_HEALTH/3)) color = 0xAA0114;
+        else if (this._health <= (START_HEALTH/3 * 2)) color = 0xFFA500;
         
         this._healthBar.fillStyle(color, 1);
         this._healthBar.fillRect(0, 0, (this._health/START_HEALTH) * 94, 15);

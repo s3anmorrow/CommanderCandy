@@ -169,7 +169,7 @@
             <key>trimMargin</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">None</enum>
+            <enum type="SpriteSettings::TrimMode">CropKeepPos</enum>
             <key>tracerTolerance</key>
             <int>200</int>
             <key>heuristicMask</key>
@@ -299,9 +299,8 @@
             <key type="filename">spritesheets/player/killed/pixil-frame-5.png</key>
             <key type="filename">spritesheets/player/killed/pixil-frame-6.png</key>
             <key type="filename">spritesheets/player/killed/pixil-frame-7.png</key>
-            <key type="filename">spritesheets/player/shoot/pixil-frame-0.png</key>
-            <key type="filename">spritesheets/player/shoot/pixil-frame-1.png</key>
-            <key type="filename">spritesheets/player/shoot/pixil-frame-2.png</key>
+            <key type="filename">spritesheets/player/shoot-left/pixil-frame-0.png</key>
+            <key type="filename">spritesheets/player/shoot-right/pixil-frame-0.png</key>
             <key type="filename">spritesheets/player/walk-left/pixil-frame-0.png</key>
             <key type="filename">spritesheets/player/walk-left/pixil-frame-1.png</key>
             <key type="filename">spritesheets/player/walk-left/pixil-frame-2.png</key>

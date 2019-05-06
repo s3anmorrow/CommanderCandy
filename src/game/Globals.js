@@ -1,6 +1,6 @@
 // global game variables
 export const DEBUG_MODE = false;
-export const BACKGROUND_COLOR = 0x003366;
+export const BACKGROUND_COLOR = 0x548ac0;
 export const START_HEALTH = 3;
 export const HEALTH_FOR_HIT = 1;
 export const BULLET_SPEED = 600;
