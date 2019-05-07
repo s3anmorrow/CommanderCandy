@@ -9,6 +9,7 @@ export default class PlatformManager {
         this._platforms = null;
         this._level = STARTING_LEVEL;
         this._candyX = 0;
+        this._candyY = 0;
         this._playerX = 0;
         this._playerY = 0;
         this._emitter = emitter;
@@ -20,6 +21,10 @@ export default class PlatformManager {
 
     get candyX() {
         return this._candyX;
+    }
+
+    get candyY() {
+        return this._candyY;
     }
 
     get playerX() {
@@ -46,6 +51,7 @@ export default class PlatformManager {
 
     levelUp() {
         if (this._level < levelManifest.length) this._level++;
+        else this._level = STARTING_LEVEL;
 
         console.log("level: " + this._level);
 
@@ -95,8 +101,10 @@ export default class PlatformManager {
                     else if (cellData.toUpperCase() == "O") type = "Orange";
                     else if (cellData.toUpperCase() == "G") type = "Green";
                     else if (cellData.toUpperCase() == "S") type = "Silver";
-                    else if (cellData.toUpperCase() == "C") this._candyX = col * 60 + 12;
-                    else if (cellData.toUpperCase() == "P") {
+                    else if (cellData.toUpperCase() == "C") {
+                        this._candyX = col * 60 + 12;
+                        this._candyY = row * 30;
+                    } else if (cellData.toUpperCase() == "P") {
                         this._playerX = col * 60 + 30;
                         this._playerY = row * 30;
                     }

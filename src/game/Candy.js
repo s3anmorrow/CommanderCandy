@@ -38,7 +38,8 @@ export default class Candy {
 
         // setting x and y location of candy drop
         this._sprite.x = this._platformManager.candyX;
-        this._sprite.y = -30;
+        this._sprite.y = this._platformManager.candyY;
+        this._sprite.body.setGravityY(0);
 
         this._sprite.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
         // setup candy to collide with platforms
@@ -50,6 +51,9 @@ export default class Candy {
     // ------------------------------------------------ private methods
     _pickup() {
         this._playerCandyCollider.destroy();
+        this._sprite.setVelocity(0,0);
+        this._sprite.setBounce(0);
+        this._sprite.body.setGravityY(-300);
         this._sprite.anims.play("candy-killed", true);
 
         // listen for end (have to play first)

@@ -170,9 +170,11 @@ export default class Player {
         if (this._immune) return;
 
         console.log("IT HURTS!!!");
-
+        
         this._immune = true;
 
+        // play animation
+        //this._sprite.anims.play('player-hurt', true);
         // remove health for enemy hit
         this._health -= HEALTH_FOR_HIT;
 
@@ -236,7 +238,6 @@ export default class Player {
     }
 
     // TODO: still has issue of player being bumped below platforms
-    // TODO: candy falls when picked up
     // TODO: hurt animation for player
 
 }

@@ -182,6 +182,18 @@
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">spritesheets/candy/idle/pixil-frame-0.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.03125,0.1875</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,8,16,16</rect>
+                <key>scale9Paddings</key>
+                <rect>8,8,16,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">spritesheets/candy/killed/pixil-frame-0.png</key>
             <key type="filename">spritesheets/candy/killed/pixil-frame-1.png</key>
             <key type="filename">spritesheets/candy/killed/pixil-frame-10.png</key>
@@ -199,7 +211,7 @@
             <key type="filename">spritesheets/candy/killed/pixil-frame-9.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0.03125,0.1875</point_f>
+                <point_f>0,0</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>

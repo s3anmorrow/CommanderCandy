@@ -77,6 +77,14 @@ export default class GameScene extends Phaser.Scene {
             prefix: "player/shoot-right/pixil-frame-",
             rate: 1
         });
+        // this._assetManager.registerAnimation({
+        //     spritesheet: "main", 
+        //     animation: "player-hurt", 
+        //     startFrame: 0, 
+        //     endFrame: 0, 
+        //     prefix: "player/hurt/pixil-frame-",
+        //     rate: 1
+        // });
 
         this._assetManager.registerAnimation({
             spritesheet: "main", 

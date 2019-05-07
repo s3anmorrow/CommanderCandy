@@ -64,6 +64,7 @@ export default class EnemyManager {
             enemy.setBounce(1);
             enemy.setCollideWorldBounds(true);
             enemy.setActive(true);
+            enemy.body.setGravityY(0);
             enemy.alpha = 1;
             enemy.setVisible(true);
             enemy.setVelocity(Phaser.Math.Between(-200, 200), 20);
@@ -99,6 +100,7 @@ export default class EnemyManager {
         // disabling enemy for death animation
         enemy.setVelocity(0,0);
         enemy.setBounce(0);
+        enemy.body.setGravityY(-300);
         enemy.bulletCollider.destroy();
         enemy.playerCollider.destroy();
 
@@ -136,8 +138,11 @@ export default class EnemyManager {
 
     levelUp() {
         // decrease delay between enemy drops
-        this._enemyDelay -= ENEMY_INTERVAL_DECREASE;
+        if (this._enemyDelay < 1000) this._enemyDelay -= ENEMY_INTERVAL_DECREASE;
         this._maxEnemies += MAX_ENEMIES_INCREASE;
+
+        console.log("level up: " + this._enemyDelay);
+
         this._startTimer();
     }
 

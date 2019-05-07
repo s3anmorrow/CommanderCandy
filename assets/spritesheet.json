@@ -30,8 +30,8 @@
 						"h": 6
 					},
 					"anchor": {
-						"x": -2,
-						"y": -1.1666666666666667
+						"x": -2.1666666666666665,
+						"y": -2.1666666666666665
 					}
 				},
 				{
@@ -55,8 +55,8 @@
 						"h": 8
 					},
 					"anchor": {
-						"x": -1.375,
-						"y": -0.75
+						"x": -1.5,
+						"y": -1.5
 					}
 				},
 				{
@@ -105,8 +105,8 @@
 						"h": 10
 					},
 					"anchor": {
-						"x": -1,
-						"y": -0.5
+						"x": -1.1,
+						"y": -1.1
 					}
 				},
 				{
@@ -130,8 +130,8 @@
 						"h": 12
 					},
 					"anchor": {
-						"x": -0.75,
-						"y": -0.3333333333333333
+						"x": -0.8333333333333334,
+						"y": -0.8333333333333334
 					}
 				},
 				{
@@ -155,8 +155,8 @@
 						"h": 12
 					},
 					"anchor": {
-						"x": -0.75,
-						"y": -0.3333333333333333
+						"x": -0.8333333333333334,
+						"y": -0.8333333333333334
 					}
 				},
 				{
@@ -180,8 +180,8 @@
 						"h": 16
 					},
 					"anchor": {
-						"x": -0.4375,
-						"y": -0.125
+						"x": -0.5,
+						"y": -0.5
 					}
 				},
 				{
@@ -205,8 +205,8 @@
 						"h": 20
 					},
 					"anchor": {
-						"x": -0.25,
-						"y": 0
+						"x": -0.3,
+						"y": -0.3
 					}
 				},
 				{
@@ -230,8 +230,8 @@
 						"h": 20
 					},
 					"anchor": {
-						"x": -0.25,
-						"y": 0
+						"x": -0.3,
+						"y": -0.3
 					}
 				},
 				{
@@ -255,8 +255,8 @@
 						"h": 26
 					},
 					"anchor": {
-						"x": -0.07692307692307693,
-						"y": 0.11538461538461539
+						"x": -0.11538461538461539,
+						"y": -0.11538461538461539
 					}
 				},
 				{
@@ -305,8 +305,8 @@
 						"h": 21
 					},
 					"anchor": {
-						"x": 0.03125,
-						"y": 0.047619047619047616
+						"x": 0,
+						"y": -0.23809523809523808
 					}
 				},
 				{
@@ -330,8 +330,8 @@
 						"h": 26
 					},
 					"anchor": {
-						"x": -0.03571428571428571,
-						"y": 0.23076923076923078
+						"x": -0.07142857142857142,
+						"y": 0
 					}
 				},
 				{
@@ -355,8 +355,8 @@
 						"h": 22
 					},
 					"anchor": {
-						"x": 0.03125,
-						"y": 0.09090909090909091
+						"x": 0,
+						"y": -0.18181818181818182
 					}
 				},
 				{
@@ -380,8 +380,8 @@
 						"h": 26
 					},
 					"anchor": {
-						"x": -0.034482758620689655,
-						"y": 0.23076923076923078
+						"x": -0.06896551724137931,
+						"y": 0
 					}
 				},
 				{
@@ -405,8 +405,8 @@
 						"h": 25
 					},
 					"anchor": {
-						"x": 0.03125,
-						"y": 0.2
+						"x": 0,
+						"y": -0.04
 					}
 				},
 				{
@@ -430,8 +430,8 @@
 						"h": 26
 					},
 					"anchor": {
-						"x": 0.03125,
-						"y": 0.23076923076923078
+						"x": 0,
+						"y": 0
 					}
 				},
 				{
@@ -785,7 +785,7 @@
 					}
 				},
 				{
-					"filename": "platform/platformOrange",
+					"filename": "platform/platformSilver",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -810,7 +810,7 @@
 					}
 				},
 				{
-					"filename": "platform/platformGreen",
+					"filename": "platform/platformOrange",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -860,7 +860,7 @@
 					}
 				},
 				{
-					"filename": "platform/platformSilver",
+					"filename": "platform/platformGreen",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -910,7 +910,7 @@
 					}
 				},
 				{
-					"filename": "player/killed/pixil-frame-4",
+					"filename": "player/killed/pixil-frame-5",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -935,28 +935,28 @@
 					}
 				},
 				{
-					"filename": "player/walk-left/pixil-frame-0",
+					"filename": "player/killed/pixil-frame-4",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 41,
-						"h": 55
+						"w": 57,
+						"h": 39
 					},
 					"spriteSourceSize": {
-						"x": 11,
-						"y": 5,
-						"w": 41,
-						"h": 55
+						"x": 1,
+						"y": 21,
+						"w": 57,
+						"h": 39
 					},
 					"frame": {
 						"x": 119,
 						"y": 145,
-						"w": 41,
-						"h": 55
+						"w": 57,
+						"h": 39
 					},
 					"anchor": {
-						"x": 0.4634146341463415,
-						"y": 0.45454545454545453
+						"x": 0.5087719298245614,
+						"y": 0.23076923076923078
 					}
 				},
 				{
@@ -974,7 +974,7 @@
 						"h": 55
 					},
 					"frame": {
-						"x": 162,
+						"x": 178,
 						"y": 145,
 						"w": 41,
 						"h": 55
@@ -985,32 +985,32 @@
 					}
 				},
 				{
-					"filename": "player/killed/pixil-frame-5",
+					"filename": "player/walk-left/pixil-frame-0",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 57,
-						"h": 39
+						"w": 41,
+						"h": 55
 					},
 					"spriteSourceSize": {
-						"x": 1,
-						"y": 21,
-						"w": 57,
-						"h": 39
+						"x": 11,
+						"y": 5,
+						"w": 41,
+						"h": 55
 					},
 					"frame": {
-						"x": 205,
+						"x": 221,
 						"y": 145,
-						"w": 57,
-						"h": 39
+						"w": 41,
+						"h": 55
 					},
 					"anchor": {
-						"x": 0.5087719298245614,
-						"y": 0.23076923076923078
+						"x": 0.4634146341463415,
+						"y": 0.45454545454545453
 					}
 				},
 				{
-					"filename": "player/idle/pixil-frame-0",
+					"filename": "player/killed/pixil-frame-0",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1031,11 +1031,11 @@
 					},
 					"anchor": {
 						"x": 0.4634146341463415,
-						"y": 0.509090909090909
+						"y": 0.45454545454545453
 					}
 				},
 				{
-					"filename": "player/killed/pixil-frame-0",
+					"filename": "player/idle/pixil-frame-0",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1056,7 +1056,7 @@
 					},
 					"anchor": {
 						"x": 0.4634146341463415,
-						"y": 0.45454545454545453
+						"y": 0.509090909090909
 					}
 				},
 				{
@@ -1085,31 +1085,6 @@
 					}
 				},
 				{
-					"filename": "player/walk-right/pixil-frame-1",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 41,
-						"h": 56
-					},
-					"spriteSourceSize": {
-						"x": 8,
-						"y": 4,
-						"w": 41,
-						"h": 56
-					},
-					"frame": {
-						"x": 87,
-						"y": 202,
-						"w": 41,
-						"h": 56
-					},
-					"anchor": {
-						"x": 0.5365853658536586,
-						"y": 0.4642857142857143
-					}
-				},
-				{
 					"filename": "player/idle/pixil-frame-1",
 					"rotated": false,
 					"trimmed": false,
@@ -1124,7 +1099,7 @@
 						"h": 55
 					},
 					"frame": {
-						"x": 130,
+						"x": 87,
 						"y": 202,
 						"w": 42,
 						"h": 55
@@ -1132,6 +1107,31 @@
 					"anchor": {
 						"x": 0.47619047619047616,
 						"y": 0.509090909090909
+					}
+				},
+				{
+					"filename": "player/walk-right/pixil-frame-1",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 56
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 4,
+						"w": 41,
+						"h": 56
+					},
+					"frame": {
+						"x": 131,
+						"y": 202,
+						"w": 41,
+						"h": 56
+					},
+					"anchor": {
+						"x": 0.5365853658536586,
+						"y": 0.4642857142857143
 					}
 				},
 				{
@@ -1235,31 +1235,6 @@
 					}
 				},
 				{
-					"filename": "player/shoot-right/pixil-frame-0",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 50,
-						"h": 55
-					},
-					"spriteSourceSize": {
-						"x": 9,
-						"y": 5,
-						"w": 50,
-						"h": 55
-					},
-					"frame": {
-						"x": 60,
-						"y": 261,
-						"w": 50,
-						"h": 55
-					},
-					"anchor": {
-						"x": 0.42,
-						"y": 0.45454545454545453
-					}
-				},
-				{
 					"filename": "player/jump/pixil-frame-0",
 					"rotated": false,
 					"trimmed": false,
@@ -1274,7 +1249,7 @@
 						"h": 56
 					},
 					"frame": {
-						"x": 112,
+						"x": 60,
 						"y": 261,
 						"w": 49,
 						"h": 56
@@ -1282,6 +1257,56 @@
 					"anchor": {
 						"x": 0.46938775510204084,
 						"y": 0.4642857142857143
+					}
+				},
+				{
+					"filename": "player/hurt/pixil-frame-0",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 49,
+						"h": 56
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 4,
+						"w": 49,
+						"h": 56
+					},
+					"frame": {
+						"x": 111,
+						"y": 261,
+						"w": 49,
+						"h": 56
+					},
+					"anchor": {
+						"x": 0.46938775510204084,
+						"y": 0.4642857142857143
+					}
+				},
+				{
+					"filename": "player/shoot-right/pixil-frame-0",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 50,
+						"h": 55
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 5,
+						"w": 50,
+						"h": 55
+					},
+					"frame": {
+						"x": 162,
+						"y": 261,
+						"w": 50,
+						"h": 55
+					},
+					"anchor": {
+						"x": 0.42,
+						"y": 0.45454545454545453
 					}
 				},
 				{
@@ -1299,7 +1324,7 @@
 						"h": 55
 					},
 					"frame": {
-						"x": 163,
+						"x": 214,
 						"y": 261,
 						"w": 51,
 						"h": 55
@@ -1324,7 +1349,7 @@
 						"h": 55
 					},
 					"frame": {
-						"x": 216,
+						"x": 267,
 						"y": 261,
 						"w": 52,
 						"h": 55
@@ -1365,6 +1390,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:af11f6f7be9891fe801886345ee306bc:ad68ffc3e571f64d35f76d74520e4777:729adc6043343cfda41c447ce8f464d6$"
+		"smartupdate": "$TexturePacker:SmartUpdate:42283921e14c371ab69b2b7b47078278:1051aef9f9d6ead90e4822a6f7bb1fcd:729adc6043343cfda41c447ce8f464d6$"
 	}
 }
