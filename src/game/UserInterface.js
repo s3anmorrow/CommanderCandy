@@ -16,7 +16,7 @@ export default class UserInterface {
     // ---------------------------------------------- public methods
     preload() {
         // loading bitmap font image
-        this._scene.load.bitmapFont('pressStart', './../assets/fonts/font.png', './../assets/fonts/font.fnt');
+        this._scene.load.bitmapFont('pressStart', './assets/fonts/font.png', './assets/fonts/font.fnt');
     }
 
     setup() {
