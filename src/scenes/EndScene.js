@@ -17,7 +17,7 @@ export default class EndScene extends Phaser.Scene {
         this._music = null;
         this._spaceKey = null;
         this._gamepad = null;
-        this._gamepadPresent = false;        
+        this._gamepadPresent = false;     
     }
 
     preload() {

@@ -16,6 +16,8 @@ export default class GameScene extends Phaser.Scene {
         this._spaceKey = null;
         this._gamepad = null;
         this._gamepadPresent = false;
+
+        this.delayCounter = 0;
     }
 
     preload() {
@@ -24,7 +26,9 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
-        // register all animations
+        // initialization
+        this.delayCounter = 0;
+
         // register all animations of game for use
         this._assetManager.registerAnimation({
             spritesheet: "main", 
@@ -171,13 +175,20 @@ export default class GameScene extends Phaser.Scene {
     }
 
     update() {
-        if (this._spaceKey.isDown) this._startGame();
-        if (this._gamepadPresent) {
-            if ((this._gamepad.buttons[0].value == 1) || 
-                (this._gamepad.buttons[1].value == 1) ||
-                (this._gamepad.buttons[2].value == 1) ||
-                (this._gamepad.buttons[3].value == 1) ||
-                (this._gamepad.buttons[9].value == 1)) this._startGame();
+        // hack : gamepad button from EndScene gets detected here as well without a delay
+        if (this.delayCounter > 50) {
+
+            if (this._spaceKey.isDown) this._startGame();
+            if (this._gamepadPresent) {
+                if ((this._gamepad.buttons[0].value == 1) || 
+                    (this._gamepad.buttons[1].value == 1) ||
+                    (this._gamepad.buttons[2].value == 1) ||
+                    (this._gamepad.buttons[3].value == 1) ||
+                    (this._gamepad.buttons[9].value == 1)) this._startGame();
+            }
+
+        } else {
+            this.delayCounter++;
         }
     }
 

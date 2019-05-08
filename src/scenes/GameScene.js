@@ -91,7 +91,6 @@ export default class GameScene extends Phaser.Scene {
 
         if (this._gamepadPresent) {
             // gamepad control monitoring
-            //if ((this._gamepad.buttons[0].value == 1) || (this._gamepad.buttons[3].value == 1)) this._player.jump();
             if ((this._gamepad.buttons[0].value == 1) || (this._gamepad.buttons[3].value == 1)) this._cursors.up.isDown = true;
             else this._cursors.up.isDown = false;
             if ((this._gamepad.buttons[1].value == 1) || (this._gamepad.buttons[2].value == 1)) this._fireKey.isDown = true;
