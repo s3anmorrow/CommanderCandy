@@ -5,11 +5,6 @@ let assetManifest = [
         "src":"./../assets/spritesheet.json"
     },
     {
-        "type":"sound",
-        "id":"test",
-        "src":"./../assets/sounds/test.ogg"
-    },
-    {
         "type":"image",
         "id":"screenTitle",
         "src":"./../assets/statics/screenTitle.png"
@@ -28,6 +23,86 @@ let assetManifest = [
         "type":"image",
         "id":"btnPlayAgain",
         "src":"./../assets/statics/btnPlayAgain.png"
+    },
+    {
+        "type":"sound",
+        "id":"sndButton",
+        "src":"./../assets/sounds/sndButton.ogg"
+    },
+    {
+        "type":"sound",
+        "id":"sndPlayerHurt",
+        "src":"./../assets/sounds/sndPlayerHurt.ogg"
+    },
+    {
+        "type":"sound",
+        "id":"sndPlayerJump",
+        "src":"./../assets/sounds/sndPlayerJump.ogg"
+    },
+    {
+        "type":"sound",
+        "id":"sndPlayerShoots",
+        "src":"./../assets/sounds/sndPlayerShoots.ogg"
+    },
+    {
+        "type":"sound",
+        "id":"sndEnemyKilled",
+        "src":"./../assets/sounds/sndEnemyKilled.ogg"
+    },
+    {
+        "type":"sound",
+        "id":"sndEnemySpawn",
+        "src":"./../assets/sounds/sndEnemySpawn.ogg"
+    },
+    {
+        "type":"sound",
+        "id":"sndLevelUp",
+        "src":"./../assets/sounds/sndLevelUp.ogg"
+    },
+    {
+        "type":"sound",
+        "id":"sndCandyPickup",
+        "src":"./../assets/sounds/sndCandyPickup.ogg"
+    },
+    {
+        "type":"sound",
+        "id":"sndCandyPop",
+        "src":"./../assets/sounds/sndCandyPop.ogg"
+    },
+    {
+        "type":"sound",
+        "id":"sndGameOver",
+        "src":"./../assets/sounds/sndGameOver.ogg"
+    },
+    {
+        "type":"sound",
+        "id":"sndEnemyBounce",
+        "src":"./../assets/sounds/sndEnemyBounce.ogg"
+    },
+    {
+        "type":"sound",
+        "id":"sndEnemyPop",
+        "src":"./../assets/sounds/sndEnemyPop.ogg"
+    },
+    {
+        "type":"sound",
+        "id":"musicTitle",
+        "src":"./../assets/sounds/musicTitle.ogg"
+    },
+    {
+        "type":"sound",
+        "id":"sndPlayerKilled",
+        "src":"./../assets/sounds/playerKilled.ogg"
+    },
+    {
+        "type":"sound",
+        "id":"musicGame",
+        "src":"./../assets/sounds/musicGame.ogg"
+    },
+    {
+        "type":"sound",
+        "id":"musicEnd",
+        "src":"./../assets/sounds/musicEnd.ogg"
     }
 ];
 

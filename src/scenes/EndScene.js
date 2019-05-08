@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { GRAVITY, MUSIC_VOLUME } from "../game/Globals";
 
 import AssetManager from "../managers/AssetManager";
 
@@ -11,6 +12,9 @@ export default class EndScene extends Phaser.Scene {
         this._game = game;
         this._btnPlayAgain = null;
         this._assetManager = new AssetManager(this);
+        this._sndButton = null;
+        this._sndGameOver = null;
+        this._music = null;
     }
 
     preload() {
@@ -22,10 +26,22 @@ export default class EndScene extends Phaser.Scene {
         this._assetManager.addImage(0, 0, "screenGameOver");
         
         this._enemy = this._assetManager.addSprite(300, 302, "enemy/idle/pixil-frame-0", "main", true);
-        this._enemy.body.setGravityY(-300);
+        this._enemy.body.setGravityY(-GRAVITY);
         this._enemy.anims.play('enemy-idle', true);
 
         this._btnPlayAgain = this._assetManager.addSprite(240, 350, "btnPlayAgain").setInteractive();
+
+        // add sounds to scene
+        this._sndGameOver = this._assetManager.addSound("sndGameOver");
+        this._sndButton = this._assetManager.addSound("sndButton");
+        this._sndGameOver.play();
+
+        // setup music
+        this._music = this._assetManager.addSound("musicEnd", {
+            volume: MUSIC_VOLUME,
+            loop: true
+        });
+        this._music.play();
 
         // add event listners to button
         this._btnPlayAgain.on("pointerover", () => {
@@ -38,6 +54,8 @@ export default class EndScene extends Phaser.Scene {
     
         this._btnPlayAgain.on("pointerdown", () => {
             // start the game!
+            this._music.stop();
+            this._sndButton.play();
             this._game.scene.stop("gameover");
             this._game.scene.start("title");
         });

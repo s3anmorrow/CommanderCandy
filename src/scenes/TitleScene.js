@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { GRAVITY ,MUSIC_VOLUME } from "../game/Globals";
 
 import AssetManager from "../managers/AssetManager";
 
@@ -10,6 +11,8 @@ export default class GameScene extends Phaser.Scene {
         this._game = game;
         this._btnStart = null;
         this._assetManager = new AssetManager(this);
+        this._sndButton = null;
+        this._music = null;
     }
 
     preload() {
@@ -129,16 +132,20 @@ export default class GameScene extends Phaser.Scene {
         this._btnStart.setInteractive();
 
         this._player = this._assetManager.addSprite(215, 248, "player/idle/pixil-frame-0", "main", true);
-        this._player.body.setGravityY(-300);
+        this._player.body.setGravityY(-GRAVITY);
         this._player.anims.play('player-idle', true);
 
         this._enemy = this._assetManager.addSprite(391, 255, "enemy/idle/pixil-frame-0", "main", true);
-        this._enemy.body.setGravityY(-300);
+        this._enemy.body.setGravityY(-GRAVITY);
         this._enemy.anims.play('enemy-idle', true);
 
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        this._test = this._assetManager.addSound("test");
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // setup sounds
+        this._sndButton = this._assetManager.addSound("sndButton");
+        this._music = this._assetManager.addSound("musicTitle", {
+            volume: MUSIC_VOLUME,
+            loop: true
+        });
+        this._music.play();
 
         // add event listners to button
         this._btnStart.on("pointerover", () => {
@@ -150,12 +157,9 @@ export default class GameScene extends Phaser.Scene {
         });
     
         this._btnStart.on("pointerdown", () => {
-
-            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            this._test.play();
-            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
             // start the game!
+            this._music.stop();
+            this._sndButton.play();
             this._game.scene.stop("title");
             this._game.scene.start("game");
         });

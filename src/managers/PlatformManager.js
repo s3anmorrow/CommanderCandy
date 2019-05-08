@@ -13,6 +13,7 @@ export default class PlatformManager {
         this._playerX = 0;
         this._playerY = 0;
         this._emitter = emitter;
+        this._sndLevelUp = null;
     }
 
     get platforms() {
@@ -47,6 +48,8 @@ export default class PlatformManager {
         // initialization
         this._level = STARTING_LEVEL;
         this._buildLevel();
+        // add sounds to scene
+        this._sndLevelUp = this._assetManager.addSound("sndLevelUp");
     }
 
     levelUp() {
@@ -70,6 +73,7 @@ export default class PlatformManager {
             onComplete: () => {
                 this._buildLevel();
                 this._scene.physics.resume();
+                this._sndLevelUp.play();
                 this._emitter.emit("GameEvent","LevelReady");
             }
         });

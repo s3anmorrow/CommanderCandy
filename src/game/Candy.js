@@ -1,5 +1,7 @@
 import Phaser from "phaser";
 
+import { GRAVITY } from "../game/Globals";
+
 export default class Candy {
 
     constructor(scene, assetManager, platformManager, emitter, player) {
@@ -10,6 +12,8 @@ export default class Candy {
         this._sprite = null;
         this._emitter = emitter;
         this._playerCandyCollider = null;
+        this._sndPickup = null;
+        this._sndPop = null;
     }
 
     // ----------------------------------------------- get/sets
@@ -27,6 +31,11 @@ export default class Candy {
         this._sprite = this._assetManager.addSprite(0, 0, "candy/idle/pixil-frame-0", "main", true);
         this._sprite.setActive(false);
         this._sprite.setVisible(false);
+
+        // add sounds to scene
+        this._sndPickup = this._assetManager.addSound("sndCandyPickup");
+        this._sndPop = this._assetManager.addSound("sndCandyPop");
+
         // release initial candy after setup complete
         this.release();
     }
@@ -53,7 +62,7 @@ export default class Candy {
         this._playerCandyCollider.destroy();
         this._sprite.setVelocity(0,0);
         this._sprite.setBounce(0);
-        this._sprite.body.setGravityY(-300);
+        this._sprite.body.setGravityY(-GRAVITY);
         this._sprite.anims.play("candy-killed", true);
 
         // listen for end (have to play first)
@@ -61,8 +70,11 @@ export default class Candy {
             this._sprite.removeAllListeners();
             this._sprite.setActive(false);
             this._sprite.setVisible(false);
+            this._sndPop.play();
             this._emitter.emit("GameEvent","CandyPickup");
         });
+
+        this._sndPickup.play();
     }
 
 }

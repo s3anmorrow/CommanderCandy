@@ -21,7 +21,7 @@
 // https://www.youtube.com/watch?v=bo3BNf3XDNc
 
 import Phaser from "phaser";
-import { DEBUG_MODE, BACKGROUND_COLOR } from "./game/Globals";
+import { DEBUG_MODE, BACKGROUND_COLOR, GRAVITY } from "./game/Globals";
 import TitleScene from "./scenes/TitleScene";
 import GameScene from "./scenes/GameScene";
 import EndScene from "./scenes/EndScene";
@@ -36,7 +36,7 @@ const config = {
   physics: {
     default: 'arcade',
     arcade: {
-        gravity: { y: 300 },
+        gravity: { y: GRAVITY },
         debug: DEBUG_MODE
     }
   }

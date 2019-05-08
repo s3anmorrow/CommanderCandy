@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-import { STARTING_ENEMY_INTERVAL, ENEMY_INTERVAL_DECREASE, STARTING_MAX_ENEMIES, MAX_ENEMIES_INCREASE } from "./../game/Globals";
+import { STARTING_ENEMY_INTERVAL, ENEMY_INTERVAL_DECREASE, STARTING_MAX_ENEMIES, MAX_ENEMIES_INCREASE, GRAVITY } from "./../game/Globals";
 
 export default class EnemyManager {
 
@@ -14,6 +14,10 @@ export default class EnemyManager {
         this._enemyDelay = STARTING_ENEMY_INTERVAL;
         this._maxEnemies = STARTING_MAX_ENEMIES;
         this._enemyCount = 0;
+        this._sndSpawn = null;
+        this._sndKilled = null;
+        this._sndBounce = null;
+        this._sndPop = null;
     }
 
     // ----------------------------------------------- public methods
@@ -46,6 +50,12 @@ export default class EnemyManager {
             enemy.body.setAllowGravity(false);
         }
 
+        // add sounds to scene
+        this._sndSpawn = this._assetManager.addSound("sndEnemySpawn");
+        this._sndKilled = this._assetManager.addSound("sndEnemyKilled");
+        this._sndBounce = this._assetManager.addSound("sndEnemyBounce");
+        this._sndPop = this._assetManager.addSound("sndEnemyPop");
+
         // start timer to release enemies into game
         this._startTimer();
         // initial release
@@ -71,7 +81,10 @@ export default class EnemyManager {
             enemy.body.setAllowGravity(true);
 
             // setup collider with platforms
-            this._platformManager.setupCollider(enemy);
+            this._scene.physics.add.collider(enemy, this._platformManager.platforms, () => {
+                this._sndBounce.play();
+            });
+
             // setup collider with player
             enemy.playerCollider = this._scene.physics.add.collider(enemy, this._player.sprite, (e, p) => {
                 if ((e.active) && (!e.killed)) this._player.hurtMe();
@@ -83,12 +96,14 @@ export default class EnemyManager {
             });  
             
             this._enemyCount++;
+
+            this._sndSpawn.play();
         }
 
-        console.log("----object pool test--------------");
-        for (let testy of this._enemies.children.entries) {
-            console.log(testy.active);
-        }
+        // console.log("----object pool test--------------");
+        // for (let testy of this._enemies.children.entries) {
+        //     console.log(testy.active);
+        // }
     }
 
     killMe(enemy, bullet) {
@@ -100,7 +115,7 @@ export default class EnemyManager {
         // disabling enemy for death animation
         enemy.setVelocity(0,0);
         enemy.setBounce(0);
-        enemy.body.setGravityY(-300);
+        enemy.body.setGravityY(-GRAVITY);
         enemy.bulletCollider.destroy();
         enemy.playerCollider.destroy();
 
@@ -130,10 +145,13 @@ export default class EnemyManager {
             this._enemyCount--;
             // an enemy has been killed!
             this._emitter.emit("GameEvent","EnemyKilled");
+            this._sndPop.play();
         });
         
         // restart the timer
         this._startTimer();
+
+        this._sndKilled.play();
     }
 
     levelUp() {

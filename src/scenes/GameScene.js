@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-import { POINTS_FOR_KILL, POINTS_FOR_CANDY } from "../game/Globals";
+import { POINTS_FOR_KILL, POINTS_FOR_CANDY, MUSIC_VOLUME } from "../game/Globals";
 
 import PlatformManager from "../managers/PlatformManager";
 import AssetManager from "../managers/AssetManager";
@@ -20,6 +20,7 @@ export default class GameScene extends Phaser.Scene {
         this._bombs = null;
         this._gameOver = false;
         this._gameOn = true;
+        this._music = null;
         
         // custom event dispatcher object - passed into to objects that need to dispatch
         this._emitter = new Phaser.Events.EventEmitter();
@@ -39,7 +40,6 @@ export default class GameScene extends Phaser.Scene {
     // each scene has its own displaylist
     preload() {
         // manager object preload stage setup
-        //this._assetManager.preload();
         this._userInterface.preload();
         this._platformManager.preload();
         this._player.preload();
@@ -63,6 +63,13 @@ export default class GameScene extends Phaser.Scene {
         // setup keyboard controls
         this._cursors = this.input.keyboard.createCursorKeys();
         this._fireKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+        // setup music
+        this._music = this._assetManager.addSound("musicGame", {
+            volume: MUSIC_VOLUME,
+            loop: true
+        });
+        this._music.play();
 
         // setup game listeners - but first removes ones from previous game
         this._emitter.removeAllListeners();
@@ -114,6 +121,7 @@ export default class GameScene extends Phaser.Scene {
                 break;
             case "GameOver":
                 // stop the game
+                this._music.stop();
                 this._game.scene.stop("game");
                 this._game.scene.start("gameover");
                 break;

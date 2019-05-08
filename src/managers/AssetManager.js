@@ -71,8 +71,9 @@ export default class AssetManager {
         return this._scene.add.image(x, y, imageID).setOrigin(0, 0);
     }
 
-    addSound(soundID) {
-        return this._scene.sound.add(soundID);
+    addSound(soundID, config = undefined) {
+        if (config == undefined) return this._scene.sound.add(soundID);
+        else return this._scene.sound.add(soundID, config);
     }
 
 }

@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { START_HEALTH, HEALTH_FOR_HIT, BULLET_SPEED, DELAY_BETWEEN_BULLETS, BULLET_MAX } from "./Globals";
+import { START_HEALTH, HEALTH_FOR_HIT, BULLET_SPEED, DELAY_BETWEEN_BULLETS, BULLET_MAX, GRAVITY } from "./Globals";
 
 export default class Player {
 
@@ -14,11 +14,13 @@ export default class Player {
         this._immune = false;
         this._reloaded = true;
         this._bulletCount = 0;
-
         this._lastDirection = 1;
-
         this._bulletTimer = null;
         this._immuneTimer = null;
+        this._sndJump = null;
+        this._sndHurt = null;
+        this._sndKilled = null;
+        this._sndShoots = null;
     }
 
     // ----------------------------------------------- get/sets
@@ -43,6 +45,7 @@ export default class Player {
     setup() {
         // initialization
         this._immune = false;
+        this._bounceFlag = false;
         this._health = START_HEALTH;
         this._reloaded = true;
         this._bulletCount = 0;
@@ -54,12 +57,13 @@ export default class Player {
             this._platformManager.playerX, 
             this._platformManager.playerY, 
             "player/idle/pixil-frame-0", "main", true);
-        this._sprite.body.setGravityY(300);
+        this._sprite.body.setGravityY(GRAVITY);
         this._sprite.setBounce(0.2);
         this._sprite.setCollideWorldBounds(true);
         this._sprite.alpha = 1;
+
         // setup collider between all platforms and the player
-        this._platformManager.setupCollider(this._sprite);
+        this._scene.physics.add.collider(this._sprite, this._platformManager.platforms);
 
         for (let n=0; n<3; n++) {
             // add bullet sprites to game
@@ -70,6 +74,13 @@ export default class Player {
             // setup collider
             this._platformManager.setupCollider(bullet, (b,p) => {this.removeBullet(b);});
         }
+
+        // add sounds to scene
+        this._sndJump = this._assetManager.addSound("sndPlayerJump");
+        this._sndHurt = this._assetManager.addSound("sndPlayerHurt");
+        this._sndShoots = this._assetManager.addSound("sndPlayerShoots");
+        this._sndKilled = this._assetManager.addSound("sndPlayerKilled");
+
     }
 
     moveLeft() {
@@ -92,6 +103,7 @@ export default class Player {
     jump() {
         if (this._sprite.body.touching.down) {
             this._sprite.setVelocityY(-330);
+            this._sndJump.play();
         }
         this._sprite.anims.play('player-jump', true);
     }
@@ -137,6 +149,8 @@ export default class Player {
                 this._reloaded = true;
                 window.clearInterval(this._bulletTimer);
             }, DELAY_BETWEEN_BULLETS);
+
+            this._sndShoots.play();
         }
     }
 
@@ -193,7 +207,8 @@ export default class Player {
         }
 
         // TODO - play animation of player getting hurt
-
+        
+        this._sndHurt.play();
         this._emitter.emit("GameEvent","PlayerHurt");
 
         if (this._health <= 0) {
@@ -223,6 +238,7 @@ export default class Player {
 
         this._sprite.on("animationcomplete", () => {
             this._sprite.removeAllListeners();
+            this._sndKilled.play();
 
             // tween to fade out enemy
             let tween = this._scene.tweens.addCounter({
@@ -231,10 +247,13 @@ export default class Player {
                 duration: 1500,
                 onUpdate: () => { this._sprite.alpha = tween.getValue(); },
                 onComplete: () => {
+                    this._sndKilled.play();
                     this._emitter.emit("GameEvent","GameOver");
                 }
             });
         });
+
+        this._sndKilled.play();
     }
 
     // TODO: still has issue of player being bumped below platforms
