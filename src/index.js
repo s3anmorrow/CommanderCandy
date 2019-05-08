@@ -33,6 +33,9 @@ const config = {
   width: 600,
   height: 600,
   backgroundColor:BACKGROUND_COLOR,
+  input: {
+    gamepad: true
+  },
   physics: {
     default: 'arcade',
     arcade: {

@@ -15,6 +15,9 @@ export default class EndScene extends Phaser.Scene {
         this._sndButton = null;
         this._sndGameOver = null;
         this._music = null;
+        this._spaceKey = null;
+        this._gamepad = null;
+        this._gamepadPresent = false;        
     }
 
     preload() {
@@ -30,6 +33,14 @@ export default class EndScene extends Phaser.Scene {
         this._enemy.anims.play('enemy-idle', true);
 
         this._btnPlayAgain = this._assetManager.addSprite(240, 350, "btnPlayAgain").setInteractive();
+
+        // setup controls
+        this._spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.input.gamepad.once('down', function (pad, button, index) {
+            console.log("Gamepad connected: " + pad.id);
+            this._gamepad = pad;
+            this._gamepadPresent = true;
+        }, this);
 
         // add sounds to scene
         this._sndGameOver = this._assetManager.addSound("sndGameOver");
@@ -52,18 +63,28 @@ export default class EndScene extends Phaser.Scene {
             this._btnPlayAgain.clearTint();
         });
     
-        this._btnPlayAgain.on("pointerdown", () => {
-            // start the game!
-            this._music.stop();
-            this._sndButton.play();
-            this._game.scene.stop("gameover");
-            this._game.scene.start("title");
-        });
+        this._btnPlayAgain.on("pointerdown", this._restartGame, this);
 
     }
 
     update() {
+        if (this._spaceKey.isDown) this._restartGame();
+        if (this._gamepadPresent) {
+            if ((this._gamepad.buttons[0].value == 1) || 
+                (this._gamepad.buttons[1].value == 1) ||
+                (this._gamepad.buttons[2].value == 1) ||
+                (this._gamepad.buttons[3].value == 1) ||
+                (this._gamepad.buttons[9].value == 1)) this._restartGame();
+        }
+    }
 
+    // ----------------------------------------------- event handlers
+    _restartGame() {
+        // restart the game!
+        this._music.stop();
+        this._sndButton.play();
+        this._game.scene.stop("gameover");
+        this._game.scene.start("title");
     }
     
 }

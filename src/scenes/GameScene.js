@@ -21,6 +21,9 @@ export default class GameScene extends Phaser.Scene {
         this._gameOver = false;
         this._gameOn = true;
         this._music = null;
+
+        this._gamepad = null;
+        this._gamepadPresent = false;
         
         // custom event dispatcher object - passed into to objects that need to dispatch
         this._emitter = new Phaser.Events.EventEmitter();
@@ -64,6 +67,13 @@ export default class GameScene extends Phaser.Scene {
         this._cursors = this.input.keyboard.createCursorKeys();
         this._fireKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
+        // setup gamepad if present
+        this.input.gamepad.once('down', function (pad, button, index) {
+            console.log("Gamepad connected: " + pad.id);
+            this._gamepad = pad;
+            this._gamepadPresent = true;
+        }, this);
+
         // setup music
         this._music = this._assetManager.addSound("musicGame", {
             volume: MUSIC_VOLUME,
@@ -79,14 +89,29 @@ export default class GameScene extends Phaser.Scene {
     update() {
         if (!this._game.scene.isActive("game") || (!this._gameOn)) return;
 
+        if (this._gamepadPresent) {
+            // gamepad control monitoring
+            //if ((this._gamepad.buttons[0].value == 1) || (this._gamepad.buttons[3].value == 1)) this._player.jump();
+            if ((this._gamepad.buttons[0].value == 1) || (this._gamepad.buttons[3].value == 1)) this._cursors.up.isDown = true;
+            else this._cursors.up.isDown = false;
+            if ((this._gamepad.buttons[1].value == 1) || (this._gamepad.buttons[2].value == 1)) this._fireKey.isDown = true;
+            else this._fireKey.isDown = false;
+
+            if (this._gamepad.axes[0].value < -0.5) this._cursors.left.isDown = true;
+            else if (this._gamepad.axes[0].value > 0.5) this._cursors.right.isDown = true;
+            else {
+                this._cursors.right.isDown = false;
+                this._cursors.left.isDown = false;
+            }
+        }
+
+        // keyboard control monitoring
         // monitor player movement
         if (this._cursors.left.isDown) this._player.moveLeft();
         else if (this._cursors.right.isDown) this._player.moveRight();
         else this._player.stop();
-
         // monitor player jump
         if (this._cursors.up.isDown) this._player.jump();
-
         // monitor player shooting
         if (this._fireKey.isDown) this._player.fire();
 

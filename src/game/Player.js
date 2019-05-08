@@ -164,6 +164,8 @@ export default class Player {
             }
         });
 
+        if (this._jumping) this._sprite.anims.play('player-jump', true);
+
         // hack : fixing issue with player being bumped below the bottom platforms
         if (this._sprite.y > 543) this._sprite.y = 543;
     }
@@ -255,8 +257,4 @@ export default class Player {
 
         this._sndKilled.play();
     }
-
-    // TODO: still has issue of player being bumped below platforms
-    // TODO: hurt animation for player
-
 }
